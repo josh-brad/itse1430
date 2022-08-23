@@ -1,6 +1,6 @@
 # ITSE 1430 - Programming in C#
 
-Making a change.
+Making a change. Making another.
 
 This repository is where your classwork and lab assignments will go.
 
