@@ -18,11 +18,9 @@ double distanceFromMoon = 0;
 distanceFromMoon = 0;
 char letterGrade;
 bool isPassing;
-
-string name;
+//string name;
 string firstname = "Dave", lastname = "Bob";
-
-firstname = lastname = name;
+//firstname = lastname = name;
 //int iHours
 //Float fRate
 
@@ -31,7 +29,7 @@ firstname = lastname = name;
 
 //Block Statment
 {
-    decimal payRate;
+//    decimal payRate;
 }
 
 //distanceFromMoon = 10.5;
