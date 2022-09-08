@@ -34,3 +34,17 @@ string firstname = "Dave", lastname = "Bob";
 
 //distanceFromMoon = 10.5;
 isPassing = distanceFromMoon > 0;
+
+int y = 10;
+
+Console.WriteLine(++y);
+Console.WriteLine(y);
+
+Console.WriteLine(--y);
+Console.WriteLine(y);
+
+Console.WriteLine(y++);
+Console.WriteLine(y);
+
+Console.WriteLine(++y);
+Console.WriteLine(y);
