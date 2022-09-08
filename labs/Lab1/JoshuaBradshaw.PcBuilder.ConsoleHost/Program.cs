@@ -4,9 +4,52 @@ Console.WriteLine("Fall Semester");
 
 Console.WriteLine("Press Anything to Start");
 Console.ReadLine();
-void Menu ()
+
+int flow;
+int Menu ()
 {
-    Console.WriteLine("Start Order");
-    Console.WriteLine("Quit");
+    Console.WriteLine("Start Order S");
+    Console.WriteLine("Quit Q");
+
+
+
+    while (true)
+    {
+
+        ConsoleKeyInfo key = Console.ReadKey();
+
+        if (key.Key == ConsoleKey.S)
+            return 1;
+
+        if (key.Key == ConsoleKey.Q)
+            return 2;
+
+        else
+            Console.WriteLine(" Enter Valid Input");
+    }
+
 }
- Menu ();
+
+flow = Menu ();
+
+void Flow ()
+{
+    if (flow == 1)
+        Console.WriteLine("Started Order");
+    if (flow == 2)
+        Console.WriteLine("Quit");
+  
+
+}
+
+Flow();
+void Order()
+{
+
+
+
+
+
+
+
+}
