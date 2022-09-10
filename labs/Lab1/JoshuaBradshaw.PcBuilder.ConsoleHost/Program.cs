@@ -42,8 +42,15 @@ int Menu ()
             StartOrder();
 
         if (key.Key == ConsoleKey.Q)
-            Console.WriteLine("Quit");
+        {
+            Console.WriteLine("\nAre you sure you want to quit?\nPress Y to confirm N to return to Main Menu");
+            ConsoleKeyInfo keyYN = Console.ReadKey();
+            if(keyYN.Key == ConsoleKey.Y)
+                Environment.Exit(0);
+            if(keyYN.Key == ConsoleKey.N)
+                Menu();
 
+        }
         if (key.Key == ConsoleKey.F)
             ViewOrder();
 
@@ -145,3 +152,4 @@ void Select ( string[] array, int[] arrayPrice )
             Console.WriteLine("Enter Valid input");      
     }    
 }
+
