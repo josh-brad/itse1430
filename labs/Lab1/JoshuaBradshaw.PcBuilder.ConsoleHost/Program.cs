@@ -81,6 +81,8 @@ void ViewOrder ()
 void StartOrder ()
 {
     cartAmount = 0;
+    cartItems.Clear();
+    cartItemsPrice.Clear();
     Order();
 }
 
@@ -102,7 +104,7 @@ void Order()
         if (key.Key == ConsoleKey.A)
             Select(processor, processorPrice);
         if (key.Key == ConsoleKey.S)
-            Select(memory, processorPrice);
+            Select(memory, memoryPrice);
         if (key.Key == ConsoleKey.D)
             Select(primaryStorage, primaryStoragePrice);
         if (key.Key == ConsoleKey.F)
