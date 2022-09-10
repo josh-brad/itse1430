@@ -27,10 +27,10 @@ int Menu ()
 {
     Console.WriteLine("\n------------------");
     Console.WriteLine("Your cart total is $" + cartAmount);
-    Console.WriteLine("\nStart Order S");
-    Console.WriteLine("See Order F");
-    Console.WriteLine("Continue Order D");
-    Console.WriteLine("Quit Q");
+    Console.WriteLine("\nS: Start Order ");
+    Console.WriteLine("F: See Order");
+    Console.WriteLine("D: Continue Order");
+    Console.WriteLine("Q: Quit");
 
 
     while (true)
@@ -58,14 +58,17 @@ int Menu ()
 
 void ViewOrder ()
 {
-    Console.WriteLine("\n------------------");
+    Console.WriteLine("\n-----------------");
     for (int i = 0; i < cartItems.Count; i++)
     {
         Console.WriteLine( cartItems[i] + "..........$" + cartItemsPrice[i]);
     }
     Console.WriteLine("-----------------");
-    Console.WriteLine(cartAmount);
-
+    Console.WriteLine("Total:         $" + cartAmount);
+    Console.WriteLine("Q: Menu");
+    ConsoleKeyInfo key = Console.ReadKey();
+    if (key.Key == ConsoleKey.Q)
+        Menu();
 }
 
 void StartOrder ()
@@ -78,12 +81,12 @@ void Order()
 {
 
     Console.WriteLine("\n------------------");
-    Console.WriteLine("Select Prossesor:A");
-    Console.WriteLine("Select Memory:S");
-    Console.WriteLine("Select Primary Storage:D");
-    Console.WriteLine("Select Secondary Storage:F");
-    Console.WriteLine("Select Graphics Card:G");
-    Console.WriteLine("Menu:Q");
+    Console.WriteLine("A: Select Prossesor");
+    Console.WriteLine("S: Select Memory");
+    Console.WriteLine("D: Select Primary Storage");
+    Console.WriteLine("F: Select Secondary Storage");
+    Console.WriteLine("G: Select Graphics Card");
+    Console.WriteLine("Q: Menu");
 
     while (true)
     {
@@ -91,7 +94,6 @@ void Order()
 
         if (key.Key == ConsoleKey.A)
             Select(processor, processorPrice);
-
         if (key.Key == ConsoleKey.S)
             Select(memory, processorPrice);
         if (key.Key == ConsoleKey.D)
@@ -102,7 +104,6 @@ void Order()
             Select(graphicsCard, graphicsCardPrice);
         if (key.Key == ConsoleKey.Q)
             Menu();
-
         else
             Console.WriteLine("Enter Valid Input");
             
@@ -121,24 +122,26 @@ void Select ( string[] array, int[] arrayPrice )
         Console.WriteLine(order + ". " + array[i] + "...........Price: $" + arrayPrice[i]);
 
     }
-    Console.WriteLine("Menu:Q");
-    string input;
-    input = Console.ReadLine();
+    Console.WriteLine("Q: Menu");
+    
 
     while (true)
     {
+        string input;
+        input = Console.ReadLine();
+
         if (Int32.TryParse(input, out int result))
         {
             cartAmount = cartAmount + arrayPrice[result - 1];
             cartItems.Add(array[result - 1]);
             cartItemsPrice.Add(arrayPrice[result - 1]);
-            Console.WriteLine("Thank You For Your Purchase");
+            Console.WriteLine("Thank You For Your Purchase\nPress Enter To Continue");
             Console.ReadLine();
             Order();
-        } 
+        }
         if (input == "Q" || input == "q")
             Menu();
         else
-            Console.WriteLine("Enter Valid input");
+            Console.WriteLine("Enter Valid input");      
     }    
 }
