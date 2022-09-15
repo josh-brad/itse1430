@@ -10,8 +10,10 @@ bool isClassic = false;
 DisplayInformation();
 bool done = false;
 do 
-{   
-    MenuOption input = DisplayMenu();
+{
+    //type infenceing coplileir figures out type based on context
+    //MenuOption input = DisplayMenu();
+    var input = DisplayMenu();
     Console.WriteLine();
     switch (input)
     {        
@@ -45,6 +47,8 @@ void DisplayInformation ()
 MenuOption DisplayMenu ()
 {
     Console.WriteLine();
+    //Console.WriteLine("--------------");
+    Console.WriteLine("".PadLeft(10, '-'));
     Console.WriteLine("A)dd Movie");
     Console.WriteLine("E)dit Moive");
     Console.WriteLine("V)eiw Movie");
@@ -121,7 +125,8 @@ int ReadInt32 ( string message, int minimunValue, int maximumValue)
         //inline vari declaration
         //int result;
         //if (Int32.TryParse(value, out result))
-        if (Int32.TryParse(value, out int result))
+        //if (Int32.TryParse(value, out int result))
+        if (Int32.TryParse(value, out var result))
         {
             if (result >= minimunValue && result <= maximumValue)
             return result;
@@ -176,10 +181,22 @@ void ViewMovie()
         Console.WriteLine("No movies available");
         return;
     }
-    Console.WriteLine(title);
-    Console.WriteLine(releaseYear);
-    Console.WriteLine("Length:  " + runLength + "mins");
-    Console.WriteLine("MPAA Rating:  " + rating);
-    Console.WriteLine("Classic: " + isClassic);
+    
+    Console.WriteLine($"{title}  ({releaseYear})");
+    
+    //1- Concatenation
+    //2- String.Format
+    //3- String interpolations
+    //To String
+    //Console.WriteLine(releaseYear);
+    //Console.WriteLine("Length:  " + runLength + "mins");
+    //Console.WriteLine(releaseYear.ToString());
+    //Console.WriteLine("Length:  " + runLength + "mins");
+    //Console.WriteLine(String.Format("Length:  {0} mins ", runLength);
+    //Console.WriteLine("Length:  {0} mins", runLength);
+    Console.WriteLine($"Length:  {runLength} mins");
+    
+    Console.WriteLine($"Rated {rating}");
+    Console.WriteLine($"This {(isClassic  ? "Is": "is Not")} a Classic");
     Console.WriteLine(description);
 }

@@ -64,3 +64,47 @@ string filePath = "C:\\windows\\system";
 
 //Verbatim
 filePath = @"C:\windows\system32";
+
+//concatenation
+string fullName = "Bob" + " " + "Smith";
+fullName = String.Concat("Bob", " ", "Smith");
+string someValues = String.Concat("You are ", 10, "Years Old", true);
+string names = String.Join(", ", "Bob", "Sue", "Jan", "George");
+
+int stringLength = fullName.Length;
+isEmptyString = fullName.Length == 0;
+
+//Manipulation
+string upperName = fullName.ToUpper();
+string lowerName = filePath.ToLower();
+
+fullName = "   Bob Smith   ";
+fullName = fullName.Trim(); //fullName.TrimStart().TrimEnd()
+filePath = filePath.Trim('\\');
+
+fullName = fullName.PadLeft(10); //.PadRight
+
+filePath.StartsWith("C:\\");
+filePath.EndsWith("\\");        //return boolean
+
+bool areEqual = firstname == lastname;
+
+
+string input = Console.ReadLine();
+
+if (input == "A")
+    Console.WriteLine("A");
+else if (input == "B")
+    Console.WriteLine("B");
+else
+    Console.WriteLine("Other");
+
+// Compare 2
+if (String.Compare(input, "A", StringComparison.OrdinalIgnoreCase) == 0)
+    Console.WriteLine("A");
+else if (String.Compare(input, "B", true) == 0)
+    Console.WriteLine("B");
+
+//Cpompare 3
+if (String.Equals(input, "A", StringComparison.OrdinalIgnoreCase))
+    Console.WriteLine("A");
