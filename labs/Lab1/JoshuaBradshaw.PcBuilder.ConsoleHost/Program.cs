@@ -55,7 +55,7 @@ int Menu ()
             ViewOrder();
 
         if (key.Key == ConsoleKey.D)
-            Order();
+            Order(0);
 
         else
             Console.WriteLine(" \nEnter Valid Input");
@@ -83,44 +83,24 @@ void StartOrder ()
     cartAmount = 0;
     cartItems.Clear();
     cartItemsPrice.Clear();
-    Order();
+    Order(0);
 }
 
-void Order()
+
+void Order (int num)
 {
-
-    Console.WriteLine("\n------------------");
-    Console.WriteLine("A: Select Prossesor");
-    Console.WriteLine("S: Select Memory");
-    Console.WriteLine("D: Select Primary Storage");
-    Console.WriteLine("F: Select Secondary Storage");
-    Console.WriteLine("G: Select Graphics Card");
-    Console.WriteLine("Q: Menu");
-
-    while (true)
+    switch (num)
     {
-        ConsoleKeyInfo key = Console.ReadKey();
-
-        if (key.Key == ConsoleKey.A)
-            Select(processor, processorPrice);
-        if (key.Key == ConsoleKey.S)
-            Select(memory, memoryPrice);
-        if (key.Key == ConsoleKey.D)
-            Select(primaryStorage, primaryStoragePrice);
-        if (key.Key == ConsoleKey.F)
-            Select(secondaryStorage, secondaryStoragePrice);
-        if (key.Key == ConsoleKey.G)
-            Select(graphicsCard, graphicsCardPrice);
-        if (key.Key == ConsoleKey.Q)
-            Menu();
-        else
-            Console.WriteLine("Enter Valid Input");
-            
+        case 0: Select(processor, processorPrice, 1); break;
+        case 1: Select(memory, memoryPrice, 2);  break;
+        case 2: Select(primaryStorage, primaryStoragePrice, 3); break;
+        case 3: Select(secondaryStorage, secondaryStoragePrice, 4); break;
+        case 4: Select(graphicsCard, graphicsCardPrice, 5); break;
+        case 5: Menu(); break;
     }
-
 }
 
-void Select ( string[] array, int[] arrayPrice )
+void Select ( string[] array, int[] arrayPrice, int num )
 {
     Console.WriteLine("\n------------------");
 
@@ -146,7 +126,7 @@ void Select ( string[] array, int[] arrayPrice )
             cartItemsPrice.Add(arrayPrice[result - 1]);
             Console.WriteLine("Thank You For Your Purchase\nPress Enter To Continue");
             Console.ReadLine();
-            Order();
+            Order(num);
         }
         if (input == "Q" || input == "q")
             Menu();
