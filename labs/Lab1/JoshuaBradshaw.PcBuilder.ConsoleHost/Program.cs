@@ -16,6 +16,7 @@ int[] graphicsCardPrice = { 0, 580, 400, 300, 325 };
 string[] operatingSystem = { "Windows 11 Home", "Windows 11 Pro", "Windows 10 Home", "Windows 10 Pro", "Linux (Fedora)", "Linux (Read Hat)" };
 int[] operatingSystemPrice = { 140, 160, 150, 170, 20, 60 };
 double cartAmount = 0;
+
 List<string> cartItems = new List<string>();
 List<int> cartItemsPrice = new List<int>();
 
@@ -68,7 +69,7 @@ void ViewOrder ()
     Console.WriteLine("\n-----------------");
     for (int i = 0; i < cartItems.Count; i++)
     {
-        Console.WriteLine( cartItems[i] + "..........$" + cartItemsPrice[i]);
+        Console.WriteLine( cartItems[i].PadRight(20, '.') + "$" + cartItemsPrice[i]);
     }
     Console.WriteLine("-----------------");
     Console.WriteLine("Total:         $" + cartAmount);
@@ -85,7 +86,6 @@ void StartOrder ()
     cartItemsPrice.Clear();
     Order(0);
 }
-
 
 void Order (int num)
 {
@@ -108,7 +108,7 @@ void Select ( string[] array, int[] arrayPrice, int num )
     {
         
         int order = i + 1;
-        Console.WriteLine(order + ". " + array[i] + "...........Price: $" + arrayPrice[i]);
+        Console.WriteLine(order + ". " + array[i].PadRight(20,'.') + "Price: $" + arrayPrice[i]);
 
     }
     Console.WriteLine("Q: Menu");
@@ -119,7 +119,7 @@ void Select ( string[] array, int[] arrayPrice, int num )
         string input;
         input = Console.ReadLine();
 
-        if (Int32.TryParse(input, out int result))
+        if (Int32.TryParse(input, out int result) & result < (array.Length + 1))
         {
             cartAmount = cartAmount + arrayPrice[result - 1];
             cartItems.Add(array[result - 1]);
