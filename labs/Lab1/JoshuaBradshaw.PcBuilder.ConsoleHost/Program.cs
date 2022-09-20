@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 Console.WriteLine("Joshua Bradshaw");
 Console.WriteLine("ITSE 1430");
 Console.WriteLine("Fall Semester");
@@ -17,8 +19,8 @@ string[] operatingSystem = { "Windows 11 Home", "Windows 11 Pro", "Windows 10 Ho
 int[] operatingSystemPrice = { 140, 160, 150, 170, 20, 60 };
 double cartAmount = 0;
 
-List<string> cartItems = new List<string>();
-List<int> cartItemsPrice = new List<int>();
+string[] items = { "", "", "", "", "", "" };
+int[] itemsPrice = { 0, 0, 0, 0, 0, 0 };
 
 Console.WriteLine("Press Enter to Start");
 Console.ReadLine();
@@ -30,7 +32,7 @@ int Menu ()
     Console.WriteLine("Your cart total is $" + cartAmount);
     Console.WriteLine("\nS: Start Order ");
     Console.WriteLine("F: See Order");
-    Console.WriteLine("D: Continue Order");
+    Console.WriteLine("D: Modify Order");
     Console.WriteLine("Q: Quit");
 
 
@@ -42,34 +44,51 @@ int Menu ()
         if (key.Key == ConsoleKey.S)
             StartOrder();
 
+        if (key.Key == ConsoleKey.F)
+            ViewOrderFunc();
+
+        if (key.Key == ConsoleKey.E)
+            ModifyOrder(0);
+
         if (key.Key == ConsoleKey.Q)
         {
-            Console.WriteLine("\nAre you sure you want to quit?\nPress Y to confirm N to return to Main Menu");
-            ConsoleKeyInfo keyYN = Console.ReadKey();
-            if(keyYN.Key == ConsoleKey.Y)
-                Environment.Exit(0);
-            if(keyYN.Key == ConsoleKey.N)
-                Menu();
-
-        }
-        if (key.Key == ConsoleKey.F)
-            ViewOrder();
-
-        if (key.Key == ConsoleKey.D)
-            Order(0);
-
+            while (true)
+            {
+                Console.WriteLine("\nAre you sure you want to quit?\nPress Y to confirm N to return to Main Menu");
+                ConsoleKeyInfo keyYN = Console.ReadKey();
+                if (keyYN.Key == ConsoleKey.Y)
+                    Environment.Exit(0);
+                if (keyYN.Key == ConsoleKey.N)
+                    Menu();
+                else
+                    Console.WriteLine(" \nEnter Valid Input");
+            }
+        } 
         else
             Console.WriteLine(" \nEnter Valid Input");
     }
 
 }
 
+void ViewOrderFunc ()
+{
+    if (itemsPrice[0] != 0)
+        ViewOrder();
+    else
+    {
+        Console.WriteLine("\n-----------------");
+        Console.WriteLine("\nNo Current Order\nPress Enter to return to Main Menu");
+        Console.ReadLine();
+        Menu();
+    }
+}
+
 void ViewOrder ()
 {
     Console.WriteLine("\n-----------------");
-    for (int i = 0; i < cartItems.Count; i++)
+    for (int i = 0; i < items.Length; i++)
     {
-        Console.WriteLine( cartItems[i].PadRight(20, '.') + "$" + cartItemsPrice[i]);
+        Console.WriteLine( items[i].PadRight(20, '.') + "$" + itemsPrice[i]);
     }
     Console.WriteLine("-----------------");
     Console.WriteLine("Total:         $" + cartAmount);
@@ -82,8 +101,8 @@ void ViewOrder ()
 void StartOrder ()
 {
     cartAmount = 0;
-    cartItems.Clear();
-    cartItemsPrice.Clear();
+    Array.Clear(items, 0, items.Length);
+    Array.Clear(itemsPrice, 0, itemsPrice.Length);
     Order(0);
 }
 
@@ -91,16 +110,41 @@ void Order (int num)
 {
     switch (num)
     {
-        case 0: Select(processor, processorPrice, 1); break;
-        case 1: Select(memory, memoryPrice, 2);  break;
-        case 2: Select(primaryStorage, primaryStoragePrice, 3); break;
-        case 3: Select(secondaryStorage, secondaryStoragePrice, 4); break;
-        case 4: Select(graphicsCard, graphicsCardPrice, 5); break;
-        case 5: Menu(); break;
-    }
+        case 0: Select(processor, processorPrice, 1, true); break;
+        case 1: Select(memory, memoryPrice, 2, true); break;
+        case 2: Select(primaryStorage, primaryStoragePrice, 3, true); break;
+        case 3: Select(secondaryStorage, secondaryStoragePrice, 4, true); break;
+        case 4: Select(graphicsCard, graphicsCardPrice, 5, true); break;
+        case 5: Select(operatingSystem, operatingSystemPrice, 6, true); break;
+        case 6: Menu(); break;
+    } 
 }
 
-void Select ( string[] array, int[] arrayPrice, int num )
+void ModifyOrder (int num)
+{
+    string input;
+    input = Console.ReadLine();
+
+    while (true)
+    {
+        if (Int32.TryParse(input, out int result) & result <= 5)
+        {
+            result = num;
+            switch (num)
+            {
+                case 0: Select(processor, processorPrice, 1, false); break;
+                case 1: Select(memory, memoryPrice, 2, false); break;
+                case 2: Select(primaryStorage, primaryStoragePrice, 3, false); break;
+                case 3: Select(secondaryStorage, secondaryStoragePrice, 4, false); break;
+                case 4: Select(graphicsCard, graphicsCardPrice, 5, false); break;
+                case 5: Select(operatingSystem, operatingSystemPrice, 6, false); break;
+            }
+        } else
+            Console.WriteLine("Enter Valid Iput");
+    }
+} 
+
+void Select ( string[] array, int[] arrayPrice, int num, bool flow )
 {
     Console.WriteLine("\n------------------");
 
@@ -111,9 +155,9 @@ void Select ( string[] array, int[] arrayPrice, int num )
         Console.WriteLine(order + ". " + array[i].PadRight(20,'.') + "Price: $" + arrayPrice[i]);
 
     }
+ 
     Console.WriteLine("Q: Menu");
     
-
     while (true)
     {
         string input;
@@ -121,12 +165,21 @@ void Select ( string[] array, int[] arrayPrice, int num )
 
         if (Int32.TryParse(input, out int result) & result < (array.Length + 1))
         {
+            string temp;
+            int digit;
             cartAmount = cartAmount + arrayPrice[result - 1];
-            cartItems.Add(array[result - 1]);
-            cartItemsPrice.Add(arrayPrice[result - 1]);
+            temp = array[result-1];
+            items[num-1] = temp;
+            digit = arrayPrice[result-1];
+            itemsPrice[num-1] = digit;
+
             Console.WriteLine("Thank You For Your Purchase\nPress Enter To Continue");
             Console.ReadLine();
-            Order(num);
+            
+                if(flow == true)
+                    Order(num);
+                else 
+                    Menu();
         }
         if (input == "Q" || input == "q")
             Menu();
