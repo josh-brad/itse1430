@@ -18,7 +18,6 @@ int[] graphicsCardPrice = { 0, 580, 400, 300, 325 };
 string[] operatingSystem = { "Windows 11 Home", "Windows 11 Pro", "Windows 10 Home", "Windows 10 Pro", "Linux (Fedora)", "Linux (Read Hat)" };
 int[] operatingSystemPrice = { 140, 160, 150, 170, 20, 60 };
 string[] components = { "Processor", "Memory", "Primary Storage", "Secondary Storage", "Graphics Card", "Operating System" };
-double cartAmount = 0;
 
 string[] items = { "", "", "", "", "", "" };
 int[] itemsPrice = { 0, 0, 0, 0, 0, 0 };
@@ -30,7 +29,7 @@ Menu();
 void Menu ()
 {
     Console.WriteLine("\n------------------");
-    Console.WriteLine("Your cart total is $" + cartAmount);
+    Console.WriteLine("Your cart total is $" + itemsPrice.Sum());
     Console.WriteLine("\nS: Start Order ");
     Console.WriteLine("F: See Order");
     Console.WriteLine("W: Modify Order");
@@ -94,7 +93,7 @@ void ViewOrder ()
         }
     }
     Console.WriteLine("-----------------");
-    Console.WriteLine("Total:         $" + cartAmount);
+    Console.WriteLine("Total:         $" + itemsPrice.Sum());
     Console.WriteLine("Q: Menu");
     ConsoleKeyInfo key = Console.ReadKey();
     if (key.Key == ConsoleKey.Q)
@@ -103,7 +102,6 @@ void ViewOrder ()
 
 void StartOrder ()
 {
-    cartAmount = 0;
     for (int i = 0; i < items.Length; i++)
     {
         items[i] = "";
@@ -120,8 +118,7 @@ void ClearOrder ()
     {
         ConsoleKeyInfo keyYN = Console.ReadKey();
         if (keyYN.Key == ConsoleKey.Y)
-        {
-            cartAmount = 0;
+        {           
             for (int i = 0; i < items.Length; i++)
             {
                 items[i] = "";
@@ -215,14 +212,13 @@ void Select ( string[] array, int[] arrayPrice, int num, bool flow )
         if (Int32.TryParse(input, out int result) & result < (array.Length + 1))
         {
             string temp;
-            int digit;
-            cartAmount = cartAmount + arrayPrice[result - 1];
+            int digit;           
             temp = array[result-1];
             items[num-1] = temp;
             digit = arrayPrice[result-1];
-            itemsPrice[num-1] = digit;
+            itemsPrice[num-1] = digit;            
 
-            Console.WriteLine("Thank You For Your Purchase\nPress Enter To Continue");
+            Console.WriteLine("\nThank You For Your Purchase\nPress Enter To Continue");
             Console.ReadLine();
             
                 if(flow == true)
