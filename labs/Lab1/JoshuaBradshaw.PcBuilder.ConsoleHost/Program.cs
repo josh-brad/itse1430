@@ -94,7 +94,7 @@ void ViewOrder ()
     }
     Console.WriteLine("-----------------");
     Console.WriteLine("Total:         $" + itemsPrice.Sum());
-    Console.WriteLine("Press Enter to return to menu");
+    Console.WriteLine("\nPress Enter to return to menu");
     Console.ReadLine();
     Menu();
 }
@@ -111,7 +111,7 @@ void StartOrder ()
 
 void ClearOrder ()
 {
-    Console.WriteLine("\nAre you sure you want to clear order?\nPress Y to confirm N to return to Main Menu");
+    Console.WriteLine("\n\nAre you sure you want to clear order?\nPress Y to confirm N to return to Main Menu");
     
     while (true)
     {
@@ -123,7 +123,7 @@ void ClearOrder ()
                 items[i] = "";
                 itemsPrice[i] = 0;
             }
-            Console.WriteLine("\nOrder has been cleared\nPress Enter to return to menu");
+            Console.WriteLine("\n\nOrder has been cleared\nPress Enter to return to menu");
             Console.ReadLine();
             Menu();
         }
