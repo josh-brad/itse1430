@@ -17,6 +17,7 @@ string[] graphicsCard = { "Nome", "GeForce RTX 3070", "GeForce RTX 2070", "Radeo
 int[] graphicsCardPrice = { 0, 580, 400, 300, 325 };
 string[] operatingSystem = { "Windows 11 Home", "Windows 11 Pro", "Windows 10 Home", "Windows 10 Pro", "Linux (Fedora)", "Linux (Read Hat)" };
 int[] operatingSystemPrice = { 140, 160, 150, 170, 20, 60 };
+string[] components = { "Processor", "Memory", "Primary Storage", "Secondary Storage", "Graphics Card", "Operating System" };
 double cartAmount = 0;
 
 string[] items = { "", "", "", "", "", "" };
@@ -57,6 +58,7 @@ void Quit ()
 {
     while (true)
     {
+        Console.WriteLine("\n------------------");
         Console.WriteLine("\nAre you sure you want to quit?\nPress Y to confirm N to return to Main Menu");
         ConsoleKeyInfo keyYN = Console.ReadKey();
         if (keyYN.Key == ConsoleKey.Y)
@@ -88,7 +90,7 @@ void ViewOrder ()
     {
         if (itemsPrice[i] != 0)
         {
-            Console.WriteLine(items[i].PadRight(20, '.') + "$" + itemsPrice[i]);
+            Console.WriteLine(components[i].PadRight(20, ' ') + items[i].PadRight(20, ' ') + "$" + itemsPrice[i]);
         }
     }
     Console.WriteLine("-----------------");
@@ -120,10 +122,14 @@ void ClearOrder ()
         if (keyYN.Key == ConsoleKey.Y)
         {
             cartAmount = 0;
-            Array.Clear(items, 0, items.Length);
-            Array.Clear(itemsPrice, 0, itemsPrice.Length);
+            for (int i = 0; i < items.Length; i++)
+            {
+                items[i] = "";
+                itemsPrice[i] = 0;
+            }
             Console.WriteLine("\nOrder has been cleared\nPress Enter to return to menu");
             Console.ReadLine();
+            Menu();
         }
         if (keyYN.Key == ConsoleKey.N)
             Menu();
@@ -166,6 +172,7 @@ void ModifyOrder ()
         Console.WriteLine("3: Secondary Storage");
         Console.WriteLine("4: Graphics Card");
         Console.WriteLine("5: Operating System");
+        Console.WriteLine("6: Menu");
         string input = Console.ReadLine();
         if (Int32.TryParse(input, out int result))
         {           
@@ -177,6 +184,7 @@ void ModifyOrder ()
                 case 3: Select(secondaryStorage, secondaryStoragePrice, 4, false); break;
                 case 4: Select(graphicsCard, graphicsCardPrice, 5, false); break;
                 case 5: Select(operatingSystem, operatingSystemPrice, 6, false); break;
+                case 6: Menu(); break;  
                 default: Console.WriteLine("Enter Valid Input"); break;
             }
         } 
@@ -220,7 +228,7 @@ void Select ( string[] array, int[] arrayPrice, int num, bool flow )
                 if(flow == true)
                     Order(num);
                 else 
-                    Menu();
+                    ModifyOrder();
         }
         if (input == "Q" || input == "q")
             Menu();
