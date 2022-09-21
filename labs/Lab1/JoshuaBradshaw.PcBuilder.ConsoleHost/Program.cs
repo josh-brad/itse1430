@@ -32,7 +32,8 @@ int Menu ()
     Console.WriteLine("Your cart total is $" + cartAmount);
     Console.WriteLine("\nS: Start Order ");
     Console.WriteLine("F: See Order");
-    Console.WriteLine("D: Modify Order");
+    Console.WriteLine("W: Modify Order");
+    Console.WriteLine("C: Clear Order");
     Console.WriteLine("Q: Quit");
 
 
@@ -40,34 +41,31 @@ int Menu ()
     {
 
         ConsoleKeyInfo key = Console.ReadKey();
-
-        if (key.Key == ConsoleKey.S)
-            StartOrder();
-
-        if (key.Key == ConsoleKey.F)
-            ViewOrderFunc();
-
-        if (key.Key == ConsoleKey.E)
-            ModifyOrder(0);
-
-        if (key.Key == ConsoleKey.Q)
+        switch (key.Key)
         {
-            while (true)
-            {
-                Console.WriteLine("\nAre you sure you want to quit?\nPress Y to confirm N to return to Main Menu");
-                ConsoleKeyInfo keyYN = Console.ReadKey();
-                if (keyYN.Key == ConsoleKey.Y)
-                    Environment.Exit(0);
-                if (keyYN.Key == ConsoleKey.N)
-                    Menu();
-                else
-                    Console.WriteLine(" \nEnter Valid Input");
-            }
-        } 
+            case ConsoleKey.S: StartOrder(); break;
+            case ConsoleKey.F: ViewOrderFunc(); break;
+            case ConsoleKey.W: ModifyOrder(); break;
+            case ConsoleKey.C: ClearOrder(); break;
+            case ConsoleKey.Q: Quit(); break;
+            default: Console.WriteLine("\nEnter Valid Input"); break;                                       
+        }
+    } 
+}
+
+void Quit ()
+{
+    while (true)
+    {
+        Console.WriteLine("\nAre you sure you want to quit?\nPress Y to confirm N to return to Main Menu");
+        ConsoleKeyInfo keyYN = Console.ReadKey();
+        if (keyYN.Key == ConsoleKey.Y)
+            Environment.Exit(0);
+        if (keyYN.Key == ConsoleKey.N)
+            Menu();
         else
             Console.WriteLine(" \nEnter Valid Input");
     }
-
 }
 
 void ViewOrderFunc ()
@@ -106,6 +104,28 @@ void StartOrder ()
     Order(0);
 }
 
+void ClearOrder ()
+{
+    Console.WriteLine("\nAre you sure you want to clear order?\nPress Y to confirm N to return to Main Menu");
+    
+    while (true)
+    {
+        ConsoleKeyInfo keyYN = Console.ReadKey();
+        if (keyYN.Key == ConsoleKey.Y)
+        {
+            cartAmount = 0;
+            Array.Clear(items, 0, items.Length);
+            Array.Clear(itemsPrice, 0, itemsPrice.Length);
+            Console.WriteLine("\nOrder has been cleared\nPress Enter to return to menu");
+            Console.ReadLine();
+        }
+        if (keyYN.Key == ConsoleKey.N)
+            Menu();
+        else
+            Console.WriteLine(" \nEnter Valid Input");
+    }
+}
+
 void Order (int num)
 {
     switch (num)
@@ -120,17 +140,23 @@ void Order (int num)
     } 
 }
 
-void ModifyOrder (int num)
+void ModifyOrder ()
 {
+    if ( itemsPrice[0] == 0 )
+    {
+        Console.WriteLine("\nNo Current Order\nPress enter to return to main menu");
+        Console.ReadLine();
+        Menu();
+    }
+
     string input;
     input = Console.ReadLine();
 
     while (true)
     {
         if (Int32.TryParse(input, out int result) & result <= 5)
-        {
-            result = num;
-            switch (num)
+        {           
+            switch (result)
             {
                 case 0: Select(processor, processorPrice, 1, false); break;
                 case 1: Select(memory, memoryPrice, 2, false); break;
