@@ -3,7 +3,7 @@ using System;
 
 Console.WriteLine("Joshua Bradshaw");
 Console.WriteLine("ITSE 1430");
-Console.WriteLine("Fall Semester");
+Console.WriteLine("Fall Semester: 9-21-22");
 
 string[] processor = { "AMD Ryzen 9 5900x", "AMD Ryzen 7 5700x", "AMD Ryzen 5600x", "Intel i9-12900k", "Intel i7-12700k", "Intel i5-12600k" };
 int[] processorPrice = { 1410, 1270, 1200, 1590, 1400, 1280 };
