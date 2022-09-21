@@ -26,7 +26,7 @@ Console.WriteLine("Press Enter to Start");
 Console.ReadLine();
 Menu();
 
-int Menu ()
+void Menu ()
 {
     Console.WriteLine("\n------------------");
     Console.WriteLine("Your cart total is $" + cartAmount);
@@ -86,7 +86,10 @@ void ViewOrder ()
     Console.WriteLine("\n-----------------");
     for (int i = 0; i < items.Length; i++)
     {
-        Console.WriteLine( items[i].PadRight(20, '.') + "$" + itemsPrice[i]);
+        if (itemsPrice[i] != 0)
+        {
+            Console.WriteLine(items[i].PadRight(20, '.') + "$" + itemsPrice[i]);
+        }
     }
     Console.WriteLine("-----------------");
     Console.WriteLine("Total:         $" + cartAmount);
@@ -99,8 +102,11 @@ void ViewOrder ()
 void StartOrder ()
 {
     cartAmount = 0;
-    Array.Clear(items, 0, items.Length);
-    Array.Clear(itemsPrice, 0, itemsPrice.Length);
+    for (int i = 0; i < items.Length; i++)
+    {
+        items[i] = "";
+        itemsPrice[i] = 0;
+    }
     Order(0);
 }
 
@@ -142,19 +148,26 @@ void Order (int num)
 
 void ModifyOrder ()
 {
+    
+    
+    
     if ( itemsPrice[0] == 0 )
     {
         Console.WriteLine("\nNo Current Order\nPress enter to return to main menu");
         Console.ReadLine();
         Menu();
     }
-
-    string input;
-    input = Console.ReadLine();
-
     while (true)
     {
-        if (Int32.TryParse(input, out int result) & result <= 5)
+        Console.WriteLine("\n-----------------");
+        Console.WriteLine("0: Processor");
+        Console.WriteLine("1: Memory");
+        Console.WriteLine("2: Primary Storage");
+        Console.WriteLine("3: Secondary Storage");
+        Console.WriteLine("4: Graphics Card");
+        Console.WriteLine("5: Operating System");
+        string input = Console.ReadLine();
+        if (Int32.TryParse(input, out int result))
         {           
             switch (result)
             {
@@ -164,9 +177,11 @@ void ModifyOrder ()
                 case 3: Select(secondaryStorage, secondaryStoragePrice, 4, false); break;
                 case 4: Select(graphicsCard, graphicsCardPrice, 5, false); break;
                 case 5: Select(operatingSystem, operatingSystemPrice, 6, false); break;
+                default: Console.WriteLine("Enter Valid Input"); break;
             }
-        } else
-            Console.WriteLine("Enter Valid Iput");
+        } 
+        else 
+            Console.WriteLine("Enter Valid Input");
     }
 } 
 
@@ -210,6 +225,6 @@ void Select ( string[] array, int[] arrayPrice, int num, bool flow )
         if (input == "Q" || input == "q")
             Menu();
         else
-            Console.WriteLine("Enter Valid input");      
+            Console.WriteLine("Enter Valid Input");      
     }    
 }
