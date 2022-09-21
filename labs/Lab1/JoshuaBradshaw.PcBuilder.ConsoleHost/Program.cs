@@ -94,10 +94,9 @@ void ViewOrder ()
     }
     Console.WriteLine("-----------------");
     Console.WriteLine("Total:         $" + itemsPrice.Sum());
-    Console.WriteLine("Q: Menu");
-    ConsoleKeyInfo key = Console.ReadKey();
-    if (key.Key == ConsoleKey.Q)
-        Menu();
+    Console.WriteLine("Press Enter to return to menu");
+    Console.ReadLine();
+    Menu();
 }
 
 void StartOrder ()
