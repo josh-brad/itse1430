@@ -1,20 +1,12 @@
 ﻿//Movie definition
 using MovieLibary;
 
-Movie movie = new Movie();
-movie.title = "Jaws";
-movie.releaseYear = 1977;
-
-string title = "";
-string description = "";
-int runLength = 0; //in minutes
-int releaseYear = 1900;
-string rating = "";
-bool isClassic = false;
-
 
 DisplayInformation();
-bool done = false;
+
+var done = false;
+
+Movie movie = null;
 do 
 {
     //type infenceing coplileir figures out type based on context
@@ -23,9 +15,14 @@ do
     Console.WriteLine();
     switch (input)
     {        
-        case MenuOption.Add: AddMovie(); break;
+        case MenuOption.Add:
+        {
+            var theMovie = AddMovie();
+            movie = theMovie.Clone();
+            break;
+        }
         case MenuOption.Edit: EditMovie(); break;
-        case MenuOption.View: ViewMovie(); break;   
+        case MenuOption.View: ViewMovie(movie); break;   
         case MenuOption.Delete: DeleteMovie(); break;
         case MenuOption.Quit: done = true; break;
     }
@@ -101,7 +98,6 @@ bool ReadBoolean ( string message )
     } while (true);    
 }
 
-
 string ReadString ( string message, bool required  )
 {
     Console.Write(message);
@@ -146,21 +142,24 @@ int ReadInt32 ( string message, int minimunValue, int maximumValue)
     } while (true);
 }
 
-void AddMovie ()
+Movie AddMovie ()
 {
-    title = ReadString("Enter a title: ", true);
+    Movie movie = new Movie ();
 
-    description = ReadString("Enter an optional description: ", false);
+    //movie.title = ReadString("Enter a title: ", true);
+    movie.SetTitle(ReadString("Enter a title: ", true));
 
-    runLength = ReadInt32("Enter a run legth (in minutes): ", 0, 300);
+    movie._description = ReadString("Enter an optional description: ", false);
 
-    releaseYear = ReadInt32("enter the release year: ", 1900, 2100);
+    movie._runLength = ReadInt32("Enter a run legth (in minutes): ", 0, 300);
 
-    rating = ReadString("Entering the MPAA: ", true);
+    movie._releaseYear = ReadInt32("enter the release year: ", 1900, 2100);
+    
+    movie._rating = ReadString("Entering the MPAA: ", true);
+   
+    movie._isClassic = ReadBoolean("Is this a classic? ");
 
-    isClassic = ReadBoolean("Is this a classic? ");
-
-
+    return movie;
 }
 
 void EditMovie ()
@@ -168,27 +167,33 @@ void EditMovie ()
 
 }
 
-void DeleteMovie ()
+Movie GetSelectedMovie ()
 {
-    if (title == "")         
-        return;
-
-    if (!ReadBoolean("Are you sure you want to delete the movie (Y/N)"))
-        return;
-    
-    title = "";    
-
+    return movie;
 }
 
-void ViewMovie()
+void DeleteMovie ()
 {
-    if (title == "")
+    var selectedMovie = GetSelectedMovie();
+
+    if (selectedMovie == null)         
+        return;
+
+    if (!ReadBoolean($"Are you sure you want to delete the '{selectedMovie.GetTitle()}' (Y/N)"))
+        return;
+    
+    movie = null;    
+}
+
+void ViewMovie(Movie movie)
+{
+    if (movie == null)
     {
         Console.WriteLine("No movies available");
         return;
     }
     
-    Console.WriteLine($"{title}  ({releaseYear})");
+    Console.WriteLine($"{movie.GetTitle()}  ({movie._releaseYear})");
     
     //1- Concatenation
     //2- String.Format
@@ -200,9 +205,9 @@ void ViewMovie()
     //Console.WriteLine("Length:  " + runLength + "mins");
     //Console.WriteLine(String.Format("Length:  {0} mins ", runLength);
     //Console.WriteLine("Length:  {0} mins", runLength);
-    Console.WriteLine($"Length:  {runLength} mins");
+    Console.WriteLine($"Length:  {movie._runLength} mins");
     
-    Console.WriteLine($"Rated {rating}");
-    Console.WriteLine($"This {(isClassic  ? "Is": "is Not")} a Classic");
-    Console.WriteLine(description);
+    Console.WriteLine($"Rated {movie._rating}");
+    Console.WriteLine($"This {(movie._isClassic  ? "Is": "is Not")} a Classic");
+    Console.WriteLine(movie._description);
 }
