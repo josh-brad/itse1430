@@ -3,30 +3,66 @@
     /// <summary>Represents a movie.</summary>
     public class Movie
     {
-        private string _title = "";
-
-        public string GetTitle ()
-        {
-            return _title;
-        }
-
-        public void SetTitle ( string title )
-        {
-            //this._title = title;
-            _title = title;
-        }
-
-        //TODO: Hide this...
-        public string _description = "";
+        public int Id { get; private set; }
         
-        public int _runLength = 0; //in minutes
-        public int _releaseYear = 1900;
-        public string _rating = "";
-        public bool _isClassic = false;
-
-        public bool IsBlackAndWhite ()
+        /// <summary>Gets or Sets Title </summary>
+        public string Title
         {
-            return _releaseYear < 1939;
+            // string get_Title ()
+            get { return String.IsNullOrEmpty(_title) ? "" : _title;}
+
+            // void set_Title ( string value )
+            set { _title = String.IsNullOrEmpty(value) ? "" : value.Trim(); } 
+        }       
+        private string _title;
+
+        //public string GetTitle ()
+        //{
+        //    return _title;
+        //}
+
+        //public void SetTitle ( string title )
+        //{
+        //    //this._title = title;
+        //    _title = title;
+        //}
+        public string Description
+        {
+            get { return String.IsNullOrEmpty(_description) ? "" : _description; }
+            set { _description = String.IsNullOrEmpty(value) ? "" : value.Trim(); }
+        }
+        private string _description;
+        
+        //public int RunLength
+        //{
+        //    get { return _runLength; }
+        //    set { _runLength = value; }
+        //}
+        //private int _runLength = 0;
+
+        public int RunLength { get; set; }
+
+        //public int ReleaseYear
+        //{
+        //    get { return _releaseYear; }
+        //    set { _releaseYear = value; }
+        //}
+        //private int _releaseYear = 1900;
+        public int ReleaseYear { get; set; } = 1900;
+
+        public string Rating
+        {
+            get { return String.IsNullOrEmpty(_rating) ? "" : _rating; }
+            set { _rating = String.IsNullOrEmpty(value) ? "" : value.Trim(); }
+        }
+        private string _rating;
+
+        public bool IsClassic { get; set; }
+
+        public bool IsBlackAndWhite
+        {
+            get { return ReleaseYear < 1939; }
+            //set { }
         }
 
         /// <summary>Clones the existing movie.</summary>
@@ -45,12 +81,12 @@
         {
             //var areEqual = title == this.title;
 
-            movie._title = _title;
-            movie._description = _description; //this.description
-            movie._runLength = _runLength;
-            movie._releaseYear = _releaseYear;
-            movie._rating = _rating;
-            movie._isClassic = _isClassic;
+            movie.Title = Title;
+            movie.Description = Description; //this.description
+            movie.RunLength = RunLength;
+            movie.ReleaseYear = ReleaseYear;
+            movie.Rating = Rating;
+            movie.IsClassic = IsClassic;
         }
     }
 }
