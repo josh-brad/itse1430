@@ -8,8 +8,9 @@ using MovieLibary;
 DisplayInformation();
 
 Movie movie = null;
-//bool done = false;
-var done = false;
+MovieDataBase dataBase = new MovieDataBase();
+
+var done = false;//bool done = false;
 do
 {
     var input = DisplayMenu();
@@ -29,7 +30,6 @@ do
         case MenuOption.Quit: done = true; break;
     };
 } while (!done);
-
 
 void DisplayInformation ()
 {
@@ -90,6 +90,8 @@ int ReadInt32 ( string message, int minimumValue, int maximumValue )
             if (result >= minimumValue && result <= maximumValue)
                 return result;
         };
+        
+        
 
         Console.WriteLine("Value must be between " + minimumValue + " and " + maximumValue);
     } while (true);
@@ -113,10 +115,9 @@ string ReadString ( string message, bool required )
     };
 }
 
-//TODO: Fix return
 Movie AddMovie ()
 {
-    Movie movie = new Movie();
+    Movie movie = new Movie("Title");
 
     //string title = "";
     //movie.title = ReadString("Enter a title: ", true);
@@ -133,7 +134,11 @@ Movie AddMovie ()
     movie.RunLength = ReadInt32("Enter a run length (in minutes): ", 0, 300);
 
     movie.ReleaseYear = ReadInt32("Enter the release year: ", 1900, 2100);
-    
+    if (movie.ReleaseYear >= Movie.YearColorWasIntroduced)
+        Console.WriteLine("Wow that is an old movie");
+
+    //var emptyMovie = Movie.Empty;
+
     movie.Rating = ReadString("Entering MPAA rating: ", true);
 
     movie.IsClassic = ReadBoolean("Is this a classic? ");
@@ -142,8 +147,15 @@ Movie AddMovie ()
 }
 
 Movie GetSelectedMovie()
-{ 
+{
     //HACK: For now
+    var item = dataBase.Get(0);
+
+    //object obj = "hello";
+    //obj = 10;
+    //obj = 4.15;
+    //obj.ToString();
+
     return movie;
 }
 

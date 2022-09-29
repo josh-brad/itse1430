@@ -3,6 +3,23 @@
     /// <summary>Represents a movie.</summary>
     public class Movie
     {
+        
+        public Movie ()  : this ("", "")
+        {
+                    
+        }
+        public Movie ( string title) : this(title, "")
+        {
+            //Init that field initializers cannot do
+            
+        }
+
+        public Movie ( string title, string description )
+        {
+            Title = title;
+            Description = description;
+        }
+
         public int Id { get; private set; }
         
         /// <summary>Gets or Sets Title </summary>
@@ -61,12 +78,17 @@
 
         public bool IsBlackAndWhite
         {
-            get { return ReleaseYear < 1939; }
+            get { return ReleaseYear < YearColorWasIntroduced; }
             //set { }
         }
 
+        public const int YearColorWasIntroduced = 1939;
+       
+        //public readonly Movie Empty = new Movie();
+        //private Movie EmptyMovie { get; } = new Movie();
         /// <summary>Clones the existing movie.</summary>
         /// <returns>A copy of the movie.</returns>
+        
         public Movie Clone ()
         {
             var movie = new Movie();
@@ -87,6 +109,10 @@
             movie.ReleaseYear = ReleaseYear;
             movie.Rating = Rating;
             movie.IsClassic = IsClassic;
+        }
+        public override string ToString ()
+        {
+            return Title;
         }
     }
 }
