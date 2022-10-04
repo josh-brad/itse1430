@@ -4,7 +4,7 @@
     public class Movie
     {
         
-        public Movie ()  : this ("", "")
+        public Movie ()  : this("", "")
         {
                     
         }
@@ -14,7 +14,7 @@
             
         }
 
-        public Movie ( string title, string description )
+        public Movie ( string title, string description ) : base()
         {
             Title = title;
             Description = description;
@@ -26,10 +26,15 @@
         public string Title
         {
             // string get_Title ()
-            get { return String.IsNullOrEmpty(_title) ? "" : _title;}
+            get 
+            { 
+                //return String.IsNullOrEmpty(_title) ? "" : _title;
+                return _title ?? "";
+            }
 
             // void set_Title ( string value )
-            set { _title = String.IsNullOrEmpty(value) ? "" : value.Trim(); } 
+            //set { _title = String.IsNullOrEmpty(value) ? "" : value.Trim(); } 
+            set { _title = value?.Trim() ?? ""; }
         }       
         private string _title;
 
@@ -45,8 +50,8 @@
         //}
         public string Description
         {
-            get { return String.IsNullOrEmpty(_description) ? "" : _description; }
-            set { _description = String.IsNullOrEmpty(value) ? "" : value.Trim(); }
+            get { return _description ?? ""; }
+            set { _description = value?.Trim() ?? ""; }
         }
         private string _description;
         
@@ -69,8 +74,8 @@
 
         public string Rating
         {
-            get { return String.IsNullOrEmpty(_rating) ? "" : _rating; }
-            set { _rating = String.IsNullOrEmpty(value) ? "" : value.Trim(); }
+            get { return _rating ?? ""; }
+            set { _rating = value?.Trim() ?? ""; }
         }
         private string _rating;
 
@@ -112,6 +117,7 @@
         }
         public override string ToString ()
         {
+            var str = base.ToString ();   // calls base ypt
             return Title;
         }
     }

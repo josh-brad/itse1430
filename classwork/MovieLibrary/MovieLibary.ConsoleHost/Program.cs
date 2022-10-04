@@ -194,3 +194,36 @@ void ViewMovie ( Movie movie )
     var blackAndWhite = movie.IsBlackAndWhite;
     //movie.IsBlackAndWhite = true;
 }
+
+void DisplayObject (object sender )
+{
+    //type casting & checking
+    string str = (string)sender;
+    
+    if (sender is string)
+    {
+        //something
+        str = (string)sender;
+    }
+
+    str = sender as string;
+    if (str != null) { };
+
+    if (sender is string str1)
+    {
+    }
+
+    if (str != null)
+    {
+        var str2 = str.ToString();
+    }
+
+    var str3 = (str != null) ? str.ToString() : "";
+
+    str3 = str ?? ""; // str ?? str2 ?? str3 ?? "";
+
+    str3 = str?.ToString();
+    
+    //movie m1 = new moive, m2 = memoive !=
+    //pt = new (10), pt1 = new (10) =
+}
