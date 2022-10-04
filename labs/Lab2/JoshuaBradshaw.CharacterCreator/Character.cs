@@ -47,29 +47,29 @@ namespace JoshuaBradshaw.CharacterCreator
         private string _race;
         public string Race 
         {
-            get { return String.IsNullOrEmpty(_race) ? "" : _race; }
-            set { _race = String.IsNullOrEmpty(value) ? "" : value.Trim(); }
+            get { return _race ?? ""; }
+            set { _race = value?.Trim() ?? ""; }
         }
        
         private string _biography;
         public string Biography
         {
-            get { return String.IsNullOrEmpty(_biography) ? "" : _biography; }
-            set { _biography = String.IsNullOrEmpty(value) ? "" : value.Trim(); }
+            get { return _biography ?? ""; }
+            set { _biography = value?.Trim() ?? ""; }
         }
         
         private string _name;
         public string Name
         {
-            get { return String.IsNullOrEmpty(_name) ? "" : _name; }
-            set { _name = String.IsNullOrEmpty(value) ? "" : value.Trim(); }
+            get { return _name ?? ""; }
+            set { _name = value?.Trim() ?? ""; }
         }
         
         private string _profession;
         public string Profession
         {           
-            get { return String.IsNullOrEmpty(_name) ? "" : _profession; }
-            set { _profession = String.IsNullOrEmpty(value) ? "" : value.Trim(); }           
+            get { return _profession ?? ""; }
+            set { _profession = value?.Trim() ?? ""; }           
         }
 
 
@@ -96,7 +96,10 @@ namespace JoshuaBradshaw.CharacterCreator
 
         public override string ToString()
         {
-            return $"Name: {Name}\n";
+            string[] message = { $"Name: {Name}", $"Race: {Race}", $"Profession: {Profession}", $"Biography: {Biography}", 
+                $"Strength: {Strength}", $"Inteligence: {Intelligence}", $"Agility: {Agility}", $"Constitution: {Constitution}", $"Charisma: {Charisma}"};
+
+             return string.Join("\n", message);
         }
 
     }

@@ -7,7 +7,7 @@
 
 const ConsoleKey viewCharacterCommand = ConsoleKey.S;
 
-Character? theCharacter = null;
+Character theCharacter = null;
 bool done = false;
 
 do
@@ -40,7 +40,7 @@ Character AddCharacter ()
     return character;    
 }
 
-void ViewCharacter (Character? character)
+void ViewCharacter (Character character)
 {
 
     if (character == null)
@@ -52,13 +52,13 @@ void ViewCharacter (Character? character)
     Console.WriteLine(character.ToString());
 }
 
-string? ReadString (string message, bool required )
+string ReadString (string message, bool required )
 {
     Console.WriteLine(message);
 
     while (true)
     {
-        string? value = Console.ReadLine();
+        string value = Console.ReadLine();
 
         if (value != null || !required)
             return value;
@@ -73,7 +73,7 @@ int ReadInt (string message, int minValue, int maxValue )
 
     while (true)
     {
-        string? value = Console.ReadLine();
+        string value = Console.ReadLine();
 
         if (Int32.TryParse(value, out var result) && result >= minValue && result <= maxValue)
             return result;
