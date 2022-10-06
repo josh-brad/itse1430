@@ -1,16 +1,12 @@
-﻿//Movie definition
+﻿//namespace MovieLibrar.ConsoleHost
 using MovieLibary;
-
-//Movie movie = new Movie();
-//movie.title = "Jaws";
-//movie.releaseYear = 1977;
 
 DisplayInformation();
 
 Movie movie = null;
 MovieDataBase dataBase = new MovieDataBase();
 
-var done = false;//bool done = false;
+var done = false;
 do
 {
     var input = DisplayMenu();
@@ -67,7 +63,6 @@ bool ReadBoolean ( string message )
 {
     Console.Write(message);
 
-    //Looking for Y/N
     do { 
         ConsoleKeyInfo key = Console.ReadKey();
         if (key.Key == ConsoleKey.Y)
@@ -163,15 +158,12 @@ void DeleteMovie ()
 {
     var selectedMovie = GetSelectedMovie();
 
-    //No movie
     if (selectedMovie == null)
         return;
 
-    //Not confirmed
     if (!ReadBoolean($"Are you sure you want to delete the movie '{selectedMovie.Title}' (Y/N)? "))
         return;
 
-    //TODO: Delete movie
     movie = null;
 }
 
@@ -192,17 +184,14 @@ void ViewMovie ( Movie movie )
     Console.WriteLine(movie.Description);
 
     var blackAndWhite = movie.IsBlackAndWhite;
-    //movie.IsBlackAndWhite = true;
 }
 
 void DisplayObject (object sender )
 {
-    //type casting & checking
     string str = (string)sender;
     
     if (sender is string)
     {
-        //something
         str = (string)sender;
     }
 
@@ -220,10 +209,7 @@ void DisplayObject (object sender )
 
     var str3 = (str != null) ? str.ToString() : "";
 
-    str3 = str ?? ""; // str ?? str2 ?? str3 ?? "";
+    str3 = str ?? ""; 
 
     str3 = str?.ToString();
-    
-    //movie m1 = new moive, m2 = memoive !=
-    //pt = new (10), pt1 = new (10) =
 }
