@@ -33,10 +33,11 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.moviesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._miMovieEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._listMovies = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,7 +71,7 @@
             // 
             this.moviesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addToolStripMenuItem,
-            this.editToolStripMenuItem,
+            this._miMovieEdit,
             this.deleteToolStripMenuItem});
             this.moviesToolStripMenuItem.Name = "moviesToolStripMenuItem";
             this.moviesToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
@@ -84,11 +85,11 @@
             this.addToolStripMenuItem.Text = "&Add";
             this.addToolStripMenuItem.Click += new System.EventHandler(this.OnMovieAdd);
             // 
-            // editToolStripMenuItem
+            // _miMovieEdit
             // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.editToolStripMenuItem.Text = "&Edit";
+            this._miMovieEdit.Name = "_miMovieEdit";
+            this._miMovieEdit.Size = new System.Drawing.Size(180, 22);
+            this._miMovieEdit.Text = "&Edit";
             // 
             // deleteToolStripMenuItem
             // 
@@ -96,6 +97,7 @@
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "&Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -109,17 +111,27 @@
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             // 
-            // Form1
+            // _listMovies
+            // 
+            this._listMovies.FormattingEnabled = true;
+            this._listMovies.ItemHeight = 15;
+            this._listMovies.Location = new System.Drawing.Point(12, 27);
+            this._listMovies.Name = "_listMovies";
+            this._listMovies.Size = new System.Drawing.Size(776, 409);
+            this._listMovies.TabIndex = 1;
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this._listMovies);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Movie Library";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -135,9 +147,10 @@
         private ToolStripMenuItem exitToolStripMenuItem;
         private ToolStripMenuItem moviesToolStripMenuItem;
         private ToolStripMenuItem addToolStripMenuItem;
-        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem _miMovieEdit;
         private ToolStripMenuItem deleteToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
+        private ListBox _listMovies;
     }
 }
