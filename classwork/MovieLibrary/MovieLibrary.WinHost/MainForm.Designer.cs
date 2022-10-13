@@ -90,6 +90,7 @@
             this._miMovieEdit.Name = "_miMovieEdit";
             this._miMovieEdit.Size = new System.Drawing.Size(180, 22);
             this._miMovieEdit.Text = "&Edit";
+            this._miMovieEdit.Click += new System.EventHandler(this._miMovieEdit_Click);
             // 
             // deleteToolStripMenuItem
             // 
@@ -97,7 +98,7 @@
             this.deleteToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteToolStripMenuItem.Text = "&Delete";
-            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.OnMovieDelete);
             // 
             // helpToolStripMenuItem
             // 
