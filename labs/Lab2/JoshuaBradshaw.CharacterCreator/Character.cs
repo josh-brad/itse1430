@@ -3,46 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace JoshuaBradshaw.CharacterCreator
 {
     public class Character
-    {
-
-        private int _strength;
-        public int Strength 
-        {
-            get { return _strength; }
-            set { _strength = VerifyStats(value) ? value: 55; }
-        }
-
-        private int _intelligence;
-        public int Intelligence
-        {
-            get { return _intelligence; }
-            set { _intelligence = VerifyStats(value) ? value : 55; }
-        }
-
-        private int _agility;
-        public int Agility 
-        {
-            get { return _agility; }
-            set { _agility = VerifyStats(value) ? value : 55; }
-        }
-
-        private int _constitution;
-        public int Constitution 
-        {
-            get { return _constitution; }
-            set { _constitution = VerifyStats(value) ? value : 55; }
-        }
-
-        private int _charisma;
-        public int Charisma 
-        {
-            get { return _charisma; }
-            set { _charisma = VerifyStats(value) ? value : 55; }
-        }
+    {   
+        public int Strength { get; set; }
+        public int Intelligence { get; set; }
+        public int Agility { get; set; }
+        public int Constitution { get; set; }
+        public int Charisma { get; set; }
        
         private string _race;
         public string Race 
@@ -72,36 +43,19 @@ namespace JoshuaBradshaw.CharacterCreator
             set { _profession = value?.Trim() ?? ""; }           
         }
 
-
-        ////public Character ( string name, string profession, string race )
-        ////{
-        ////    _name = name;
-        ////   _profession = profession;
-        ////  _race = race;
-        ////}
-       
-
-        public void SetStrength (int strength)
-        {
-            if (VerifyStats(strength))
-            {
-                _strength = strength;
-            }
-        }
-
-        private bool VerifyStats (int stat)
-        {
-            return stat <= 100 && stat >= 1;                           
-        }
-
         public override string ToString()
         {
-            string[] message = { $"Name: {Name}", $"Race: {Race}", $"Profession: {Profession}", $"Biography: {Biography}", 
-                $"Strength: {Strength}", $"Inteligence: {Intelligence}", $"Agility: {Agility}", $"Constitution: {Constitution}", $"Charisma: {Charisma}"};
+
+            string[] message = { "Name: ".PadRight(20, ' ') + Name, "Race: ".PadRight(20, ' ') + Race , "Profession: ".PadRight(20, ' ') + Profession, 
+                "Biography: ".PadRight(20, ' ') + Biography, "Strength: ".PadRight(20, ' ') + Strength, "Intelligence: ".PadRight(20, ' ') + Intelligence,
+                "Agility: ".PadRight(20, ' ') + Agility, "Constitution: ".PadRight(20, ' ') + Constitution, "Charisma: ".PadRight(20, ' ') + Charisma};
 
              return string.Join("\n", message);
         }
 
     }
 }
+//string[] message = { "Name: ".PadRight(10, ' ') + Name, $"Race: ", $"Profession: {Profession}", $"Biography: {Biography}",
+//                $"Strength: {Strength}", $"Inteligence: {Intelligence}", $"Agility: {Agility}", $"Constitution: {Constitution}", $"Charisma: {Charisma}"};
+
 
