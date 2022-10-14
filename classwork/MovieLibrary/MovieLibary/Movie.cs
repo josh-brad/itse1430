@@ -61,6 +61,32 @@
         /// <summary>Clones the existing movie.</summary>
         /// <returns>A copy of the movie.</returns>
         
+        public bool Validate (out string errorMessage)
+        {
+            if (Title.Length == 0)
+            {
+                errorMessage = "Title is Required";
+                return false;
+            };
+            if (Rating.Length == 0)
+            {
+                errorMessage = "Rating is Required";
+                return false;
+            };
+            if (RunLength <= 0)
+            {
+                errorMessage = "Run Length must be > 0";
+                return false;
+            };
+            if (ReleaseYear < 1900)
+            {
+                errorMessage = "Release Year must be >= 1900";
+                return false;
+            };
+
+            errorMessage = null;
+            return true;
+        }
         public Movie Clone ()
         {
             var movie = new Movie();

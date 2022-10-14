@@ -20,6 +20,24 @@ namespace MovieLibrary.WinHost
         
         public Movie SelectedMovie { get; set; }
 
+        protected override void OnLoad ( EventArgs e )
+        {
+            base.OnLoad(e);
+
+            //DO Any init before ui is rendered
+            if( SelectedMovie != null)
+            {
+                //Load UI
+                _txtTitle.Text = SelectedMovie.Title;
+                _txtDescription.Text = SelectedMovie.Description;
+                _cbRating.Text = SelectedMovie.Rating;
+
+                _chkIsClassic.Checked = SelectedMovie.IsClassic;
+                _txtRunLength.Text = SelectedMovie.RunLength.ToString();
+                _txtReleaseYear.Text = SelectedMovie.ReleaseYear.ToString();
+            };
+        }
+
         private void OnSave ( object sender, EventArgs e )
         {
             //TDOt add validation
@@ -32,24 +50,9 @@ namespace MovieLibrary.WinHost
             movie.ReleaseYear = GetInt32(_txtReleaseYear);
             movie.RunLength = GetInt32(_txtRunLength);
 
-            if (movie.Title.Length == 0)
+            if (!movie.Validate(out var error))
             {
-                DisplayError("Title is Required", "Save");
-                return;
-            };
-            if (movie.Rating.Length == 0)
-            {
-                DisplayError("Rating is Required", "Save");
-                return;
-            };
-            if (movie.RunLength < 0)
-            {
-                DisplayError("Run Length must be >= 0", "Save");
-                return;
-            };
-            if (movie.ReleaseYear < 1900)
-            {
-                DisplayError("Release Year must be >= 1900", "Save");
+                DisplayError(error, "Save");
                 return;
             };
 
@@ -69,5 +72,6 @@ namespace MovieLibrary.WinHost
         {
             MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
     }
 }
