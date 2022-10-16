@@ -1,10 +1,5 @@
 ﻿using JoshuaBradshaw.CharacterCreator;
 
-//Character myCharacter = new Character("Bob", "Hunter", "Elf");
-//Console.WriteLine(myCharacter.Name);
-//myCharacter.Strength = 99;
-//Console.WriteLine(myCharacter.Strength);
-
 string[] races = { "Human", "Dwarf", "Gnome", "Elf", "Half Elf" };
 string[] profession = { "Fighter", "Hunter", "Priest", "Rogue", "Wizard" };
 
