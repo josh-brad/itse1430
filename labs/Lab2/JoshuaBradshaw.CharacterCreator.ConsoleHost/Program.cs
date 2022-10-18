@@ -1,5 +1,7 @@
 ﻿using JoshuaBradshaw.CharacterCreator;
-
+/* Joshua Bradshaw
+ * ISTE 1430
+ */
 string[] races = { "Human", "Dwarf", "Gnome", "Elf", "Half Elf" };
 string[] profession = { "Fighter", "Hunter", "Priest", "Rogue", "Wizard" };
 

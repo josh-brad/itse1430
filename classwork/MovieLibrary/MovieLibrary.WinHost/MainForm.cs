@@ -12,7 +12,7 @@ namespace MovieLibrary.WinHost
         private void OnMovieAdd ( object sender, EventArgs e )
         {
             var child = new MovieForm();
-            if (child.ShowDialog() != DialogResult.OK)
+            if (child.ShowDialog(this) != DialogResult.OK)
                 return;
             //todo save this off
             _movie = child.SelectedMovie;
@@ -24,13 +24,13 @@ namespace MovieLibrary.WinHost
 
         private bool Confirm ( string message, string title )
         {
-            DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(this, message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return result == DialogResult.Yes;
         }
 
         private void DisplayError ( string message, string title )
         {
-            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void OnMovieDelete ( object sender, EventArgs e )
@@ -74,7 +74,7 @@ namespace MovieLibrary.WinHost
             return _movie;
         }
 
-        private void _miMovieEdit_Click ( object sender, EventArgs e )
+        private void OnMovieEdit ( object sender, EventArgs e )
         {
             var movie = GetSelectedMovie();
             if (movie == null)
@@ -82,12 +82,24 @@ namespace MovieLibrary.WinHost
             var child = new MovieForm();
             child.SelectedMovie = movie;
             
-            if (child.ShowDialog() != DialogResult.OK)
+            if (child.ShowDialog(this) != DialogResult.OK)
                 return;
 
             _movie = child.SelectedMovie;
 
             UpDateUi();
+        }
+
+        private void OnFileExit ( object sender, EventArgs e )
+        {
+            Close();
+        }
+
+        private void OnHelpAbout ( object sender, EventArgs e )
+        {
+            var about = new AboutForm();
+
+            about.ShowDialog();
         }
     }
 }

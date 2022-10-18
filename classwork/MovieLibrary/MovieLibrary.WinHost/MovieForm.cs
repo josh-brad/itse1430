@@ -70,7 +70,7 @@ namespace MovieLibrary.WinHost
         }
         private void DisplayError ( string message, string title )
         {
-            MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
     }
