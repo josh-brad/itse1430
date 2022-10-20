@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
+// Joshua Bradshaw
+// ISTE 1430
+// Fall Semester: 10-19-22
+
 namespace JoshuaBradshaw.CharacterCreator
 {
     public class Character
@@ -42,20 +46,6 @@ namespace JoshuaBradshaw.CharacterCreator
             get { return _profession ?? ""; }
             set { _profession = value?.Trim() ?? ""; }           
         }
-
-        public override string ToString()
-        {
-
-            string[] message = { "Name: ".PadRight(20, ' ') + Name, "Race: ".PadRight(20, ' ') + Race , "Profession: ".PadRight(20, ' ') + Profession, 
-                "Biography: ".PadRight(20, ' ') + Biography, "Strength: ".PadRight(20, ' ') + Strength, "Intelligence: ".PadRight(20, ' ') + Intelligence,
-                "Agility: ".PadRight(20, ' ') + Agility, "Constitution: ".PadRight(20, ' ') + Constitution, "Charisma: ".PadRight(20, ' ') + Charisma};
-
-             return string.Join("\n", message);
-        }
-
     }
 }
-//string[] message = { "Name: ".PadRight(10, ' ') + Name, $"Race: ", $"Profession: {Profession}", $"Biography: {Biography}",
-//                $"Strength: {Strength}", $"Inteligence: {Intelligence}", $"Agility: {Agility}", $"Constitution: {Constitution}", $"Charisma: {Charisma}"};
-
 
