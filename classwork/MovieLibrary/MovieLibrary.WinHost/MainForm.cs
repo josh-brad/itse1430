@@ -20,7 +20,9 @@ namespace MovieLibrary.WinHost
             //child.Show();
             UpDateUi();
         }
+      
         private Movie _movie;
+        private MovieDataBase _movies = new MovieDataBase();
 
         private bool Confirm ( string message, string title )
         {
@@ -63,11 +65,11 @@ namespace MovieLibrary.WinHost
 
         private void UpDateUi ()
         {
-           _listMovies.Items.Clear();
-            if (_movie != null)
-            {
-                _listMovies.Items.Add(_movie);
-            }
+            var movies = _movies.GetAll();
+            movies[0].Title = "New Movie";
+            
+            _listMovies.Items.Clear();
+            _listMovies.Items.AddRange(movies);
         }
         private Movie GetSelectedMovie ()
         {

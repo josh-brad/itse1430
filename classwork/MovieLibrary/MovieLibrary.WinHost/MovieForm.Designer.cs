@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent ()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this._txtTitle = new System.Windows.Forms.TextBox();
             this._txtRunLength = new System.Windows.Forms.TextBox();
@@ -41,6 +42,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this._btnCancel = new System.Windows.Forms.Button();
             this._btnSave = new System.Windows.Forms.Button();
+            this._errors = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -61,6 +64,7 @@
             this._txtTitle.Name = "_txtTitle";
             this._txtTitle.Size = new System.Drawing.Size(211, 23);
             this._txtTitle.TabIndex = 0;
+            this._txtTitle.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateTitle);
             // 
             // _txtRunLength
             // 
@@ -68,6 +72,7 @@
             this._txtRunLength.Name = "_txtRunLength";
             this._txtRunLength.Size = new System.Drawing.Size(33, 23);
             this._txtRunLength.TabIndex = 2;
+            this._txtRunLength.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateRunLength);
             // 
             // _chkIsClassic
             // 
@@ -92,6 +97,7 @@
             this._cbRating.Name = "_cbRating";
             this._cbRating.Size = new System.Drawing.Size(60, 23);
             this._cbRating.TabIndex = 1;
+            this._cbRating.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateRating);
             // 
             // _txtDescription
             // 
@@ -111,6 +117,7 @@
             this._txtReleaseYear.Size = new System.Drawing.Size(33, 23);
             this._txtReleaseYear.TabIndex = 3;
             this._txtReleaseYear.Text = "1900";
+            this._txtReleaseYear.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateReleaseYear);
             // 
             // label2
             // 
@@ -151,6 +158,7 @@
             // _btnCancel
             // 
             this._btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this._btnCancel.CausesValidation = false;
             this._btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this._btnCancel.Location = new System.Drawing.Point(277, 330);
             this._btnCancel.Name = "_btnCancel";
@@ -170,10 +178,16 @@
             this._btnSave.UseVisualStyleBackColor = true;
             this._btnSave.Click += new System.EventHandler(this.OnSave);
             // 
+            // _errors
+            // 
+            this._errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this._errors.ContainerControl = this;
+            // 
             // MovieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.ClientSize = new System.Drawing.Size(384, 379);
             this.Controls.Add(this._btnSave);
             this.Controls.Add(this._btnCancel);
@@ -196,6 +210,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Movie Details";
+            ((System.ComponentModel.ISupportInitialize)(this._errors)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,5 +231,6 @@
         private Label label5;
         private Button _btnCancel;
         private Button _btnSave;
+        private ErrorProvider _errors;
     }
 }
