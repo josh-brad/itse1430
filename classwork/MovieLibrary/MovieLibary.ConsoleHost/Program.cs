@@ -4,7 +4,6 @@ using MovieLibary;
 DisplayInformation();
 
 Movie movie = null;
-MovieDataBase dataBase = new MovieDataBase();
 
 var done = false;
 do
@@ -144,7 +143,6 @@ Movie AddMovie ()
 Movie GetSelectedMovie()
 {
     //HACK: For now
-    var item = dataBase.Get(0);
 
     //object obj = "hello";
     //obj = 10;
