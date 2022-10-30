@@ -56,21 +56,20 @@ namespace ContactCreator
 
         public Contact Clone ()
         {
-            var movie = new Contact();
-            CopyTo(movie);
+            var contact = new Contact();
+            CopyTo(contact);
 
-            return movie;
+            return contact;
         }
 
         public void CopyTo ( Contact contact )
         {
             contact.Id = Id;
-            contact.Title = Title;
-            contact.Description = Description;
-            contact.RunLength = RunLength;
-            contact.ReleaseYear = ReleaseYear;
-            contact.Rating = Rating;
-            contact.IsClassic = IsClassic;
+            contact.LastName = LastName;
+            contact.FirstName = FirstName;
+            contact.Email = Email;
+            contact.Notes = Notes;
+            contact.IsFavorite = IsFavorite;
         }
     }
 }

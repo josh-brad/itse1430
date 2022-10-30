@@ -10,14 +10,6 @@ namespace ContactCreator
     {
         public ContactDatabase ()
         {
-            //var movie = new Movie();
-            //movie.Title = "Jaws";
-            //movie.Rating = "PG";
-            //movie.RunLength = 210;
-            //movie.Description = "Shaek eat";
-            //movie.IsClassic = true;
-            //Add(movie, out var error);
-
             var movie = new Movie() {
                 Title = "Dune",
                 Rating = "PG",
@@ -61,15 +53,6 @@ namespace ContactCreator
         /// </remarks>
         public virtual Contact Add ( Contact contact, out string errorMessage )
         {
-            //Array
-            // Find first null element
-            // If found then set to new movie
-            // Else
-            //   Resize the array 
-            //   Copy all existing elements over
-            //   Set 'oldarray.Length' to new movie
-
-            //Validate movie
             if (contact == null)
             {
                 errorMessage = "Movie cannot be null";
@@ -92,7 +75,7 @@ namespace ContactCreator
             _movies.Add(contact.Clone());
 
             errorMessage = null;
-            return movie;
+            return contact;
         }
 
         /// <summary>Gets a movie.</summary>
@@ -104,13 +87,9 @@ namespace ContactCreator
         /// </remarks>
         public Movie Get ( int id )
         {
-            //Enumerate array looking for match            
-            //for (var index = 0; index < _movies.Length; ++index)
-            //if (_movies[index]?.Id == id)
-            //return _movies[index].Clone();  //Clone because of ref type
             foreach (var movie in _movies)
                 if (movie?.Id == id)
-                    return movie.Clone();  //Clone because of ref type
+                    return movie.Clone();
 
             return null;
         }
@@ -120,8 +99,6 @@ namespace ContactCreator
         public Movie[] GetAll ()
         {
             var items = new Movie[_movies.Count];
-            //for (var index = 0; index < _movies.Length; ++index)
-            //    items[index] = _movies[index]?.Clone();
             var index = 0;
             foreach (var movie in _movies)
                 items[index++] = movie.Clone();
@@ -201,13 +178,7 @@ namespace ContactCreator
         }
 
         private int _id = 1;
-
-        //System.Collections.Generic
-        //private Movie[] _movies = new Movie[100];
         private List<Movie> _movies = new List<Movie>();
-        //private Collection<Movie> _movies = new Collection<Movie>();
-        //List<string>;
-        //  List<int>;
         #endregion
     }
 }
