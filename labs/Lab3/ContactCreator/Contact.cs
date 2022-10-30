@@ -50,5 +50,27 @@ namespace ContactCreator
 
             return errors;
         }
+
+        public int Id { get; set; }
+
+
+        public Contact Clone ()
+        {
+            var movie = new Contact();
+            CopyTo(movie);
+
+            return movie;
+        }
+
+        public void CopyTo ( Contact contact )
+        {
+            contact.Id = Id;
+            contact.Title = Title;
+            contact.Description = Description;
+            contact.RunLength = RunLength;
+            contact.ReleaseYear = ReleaseYear;
+            contact.Rating = Rating;
+            contact.IsClassic = IsClassic;
+        }
     }
 }
