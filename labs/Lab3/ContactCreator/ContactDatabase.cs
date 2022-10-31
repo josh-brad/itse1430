@@ -11,47 +11,47 @@ namespace ContactCreator
         public ContactDatabase ()
         {
             var contact = new Contact() {
-                FirstName = "Dune",
-                LastName = "PG",
-                Notes = "asdasdas",
-                Email = "Worm eat",
+                FirstName = "Tim",
+                LastName = "Bobby",
+                Notes = "CEO of Google",
+                Email = "timcook@gmail.com",
                 IsFavorite = true,
             };
             Add(contact, out var error);
 
             contact = new Contact() {
-                FirstName = "Dune",
-                LastName = "PG",
-                Notes = "asdasdas",
-                Email = "Worm eat",
+                FirstName = "Larry",
+                LastName = "Bobson",
+                Notes = "CEO of Apple",
+                Email = "dave@apple.com",
                 IsFavorite = true,
             };
             Add(contact, out error);
 
             contact = new Contact() {
-                FirstName = "Dune",
-                LastName = "PG",
-                Notes = "asdasdas",
-                Email = "Worm eat",
+                FirstName = "Jessie",
+                LastName = "James",
+                Notes = "CEO of Younger INC",
+                Email = "lawabidingcitizen@train.com",
                 IsFavorite = true,
             };
             Add(contact, out error);
         }
 
-        /// <summary>Adds a movie to the database.</summary>
-        /// <param name="movie">The movie to add.</param>
-        /// <returns>The new movie.</returns>
+        /// <summary>Adds a contact to the database.</summary>
+        /// <param name="contact">The contact to add.</param>
+        /// <returns>The new contact.</returns>
         /// <remarks>
         /// Fails if:
-        ///   - Movie is null
-        ///   - Movie is not valid
-        ///   - Movie title already exists
+        ///   - contact is null
+        ///   - contact is not valid
+        ///   - contact lastname already exists
         /// </remarks>
         public virtual Contact Add ( Contact contact, out string errorMessage )
         {
             if (contact == null)
             {
-                errorMessage = "Movie cannot be null";
+                errorMessage = "Contact cannot be null";
                 return null;
             };
 
@@ -61,7 +61,7 @@ namespace ContactCreator
             var existing = FindByTitle(contact.LastName);
             if (existing != null)
             {
-                errorMessage = "Movie must be unique";
+                errorMessage = "Contact must be unique";
                 return null;
             };
 
@@ -72,24 +72,24 @@ namespace ContactCreator
             return contact;
         }
 
-        /// <summary>Gets a movie.</summary>
-        /// <param name="id">ID of the movie.</param>
-        /// <returns>The movie, if any.</returns>
+        /// <summary>Gets a contact.</summary>
+        /// <param name="id">ID of the contact.</param>
+        /// <returns>The contact, if any.</returns>
         /// <remarks>
         /// Fails if:
         ///    - Id is less than 1
         /// </remarks>
         public Contact Get ( int id )
         {
-            foreach (var movie in _contacts)
-                if (movie?.Id == id)
-                    return movie.Clone();
+            foreach (var contact in _contacts)
+                if (contact?.Id == id)
+                    return contact.Clone();
 
             return null;
         }
 
-        /// <summary>Gets all the movies.</summary>
-        /// <returns>The movies.</returns>
+        /// <summary>Gets all the contacts.</summary>
+        /// <returns>The contacts.</returns>
         public Contact[] GetAll ()
         {
             var items = new Contact[_contacts.Count];
@@ -114,7 +114,7 @@ namespace ContactCreator
         {
             if (contact == null)
             {
-                errorMessage = "Movie cannot be null";
+                errorMessage = "Contact cannot be null";
                 return false;
             };
             //if (!new ObjectValidator().IsValid(contact, out errorMessage))
@@ -123,13 +123,13 @@ namespace ContactCreator
             var oldContact = FindByLastName(id);
             if (oldContact == null)
             {
-                errorMessage = "Movie does not exist";
+                errorMessage = "Contact does not exist";
                 return false;
             };
             var existing = FindByTitle(contact.LastName);
             if (existing != null && existing.Id != id)
             {
-                errorMessage = "Movie must be unique";
+                errorMessage = "Contact must be unique";
                 return false;
             };
             contact.CopyTo(oldContact);
@@ -143,9 +143,9 @@ namespace ContactCreator
 
         private Contact FindByLastName ( int id )
         {
-            foreach (var movie in _contacts)
-                if (movie.Id == id)
-                    return movie;
+            foreach (var contact in _contacts)
+                if (contact.Id == id)
+                    return contact;
 
             return null;
         }

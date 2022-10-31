@@ -73,18 +73,22 @@
             // 
             // _textFirstName
             // 
+            this._textFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._textFirstName.Location = new System.Drawing.Point(116, 27);
             this._textFirstName.Name = "_textFirstName";
-            this._textFirstName.Size = new System.Drawing.Size(100, 23);
-            this._textFirstName.TabIndex = 3;
+            this._textFirstName.Size = new System.Drawing.Size(156, 23);
+            this._textFirstName.TabIndex = 0;
             this._textFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateFirstName);
             // 
             // _textLastName
             // 
+            this._textLastName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._textLastName.Location = new System.Drawing.Point(116, 58);
             this._textLastName.Name = "_textLastName";
-            this._textLastName.Size = new System.Drawing.Size(100, 23);
-            this._textLastName.TabIndex = 4;
+            this._textLastName.Size = new System.Drawing.Size(156, 23);
+            this._textLastName.TabIndex = 1;
             this._textLastName.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateLastName);
             // 
             // label4
@@ -98,28 +102,36 @@
             // 
             // _checkIsFavorite
             // 
+            this._checkIsFavorite.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._checkIsFavorite.AutoSize = true;
-            this._checkIsFavorite.Location = new System.Drawing.Point(116, 153);
+            this._checkIsFavorite.Location = new System.Drawing.Point(116, 229);
             this._checkIsFavorite.Name = "_checkIsFavorite";
             this._checkIsFavorite.Size = new System.Drawing.Size(79, 19);
-            this._checkIsFavorite.TabIndex = 6;
+            this._checkIsFavorite.TabIndex = 4;
             this._checkIsFavorite.Text = "Is Favorite";
             this._checkIsFavorite.UseVisualStyleBackColor = true;
             // 
             // _textEmail
             // 
+            this._textEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._textEmail.Location = new System.Drawing.Point(116, 91);
             this._textEmail.Name = "_textEmail";
-            this._textEmail.Size = new System.Drawing.Size(100, 23);
-            this._textEmail.TabIndex = 7;
+            this._textEmail.Size = new System.Drawing.Size(156, 23);
+            this._textEmail.TabIndex = 2;
             this._textEmail.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateEmail);
             // 
             // _textNotes
             // 
+            this._textNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this._textNotes.Location = new System.Drawing.Point(116, 124);
+            this._textNotes.Multiline = true;
             this._textNotes.Name = "_textNotes";
-            this._textNotes.Size = new System.Drawing.Size(100, 23);
-            this._textNotes.TabIndex = 8;
+            this._textNotes.Size = new System.Drawing.Size(156, 99);
+            this._textNotes.TabIndex = 3;
             // 
             // _errors
             // 
@@ -128,20 +140,22 @@
             // 
             // _btnSave
             // 
+            this._btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this._btnSave.Location = new System.Drawing.Point(116, 254);
             this._btnSave.Name = "_btnSave";
             this._btnSave.Size = new System.Drawing.Size(75, 23);
-            this._btnSave.TabIndex = 9;
+            this._btnSave.TabIndex = 5;
             this._btnSave.Text = "Save";
             this._btnSave.UseVisualStyleBackColor = true;
             this._btnSave.Click += new System.EventHandler(this.OnSave);
             // 
             // _btnCancel
             // 
+            this._btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this._btnCancel.Location = new System.Drawing.Point(197, 254);
             this._btnCancel.Name = "_btnCancel";
             this._btnCancel.Size = new System.Drawing.Size(75, 23);
-            this._btnCancel.TabIndex = 10;
+            this._btnCancel.TabIndex = 6;
             this._btnCancel.Text = "Cancel";
             this._btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -149,7 +163,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(384, 361);
             this.Controls.Add(this._btnCancel);
             this.Controls.Add(this._btnSave);
             this.Controls.Add(this._textNotes);
@@ -161,6 +175,9 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximumSize = new System.Drawing.Size(600, 600);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "ContactForm";
             this.Text = "ContactForm";
             ((System.ComponentModel.ISupportInitialize)(this._errors)).EndInit();

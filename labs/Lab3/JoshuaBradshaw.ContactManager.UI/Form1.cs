@@ -17,7 +17,6 @@ namespace JoshuaBradshaw.ContactManager.UI
             if (Confirm("Are you sure you want to leave?", "Close"))
                 return;
 
-            //Stop the event
             e.Cancel = true;
         }
 
@@ -108,11 +107,10 @@ namespace JoshuaBradshaw.ContactManager.UI
 
         private void UpdateUI ()
         {
-            //Get movies
-            var movies = _contacts.GetAll();
+            var contacts = _contacts.GetAll();
 
             _listContacts.Items.Clear();
-            _listContacts.Items.AddRange(movies);
+            _listContacts.Items.AddRange(contacts);
         }
 
         private Contact GetSelectedContact ()
@@ -132,7 +130,6 @@ namespace JoshuaBradshaw.ContactManager.UI
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private Contact _contact;
         private ContactDatabase _contacts = new ContactDatabase();
         #endregion
 

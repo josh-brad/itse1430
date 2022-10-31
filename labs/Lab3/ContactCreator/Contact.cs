@@ -70,5 +70,10 @@ namespace ContactCreator
 
             return errors;
         }
+
+        public override string ToString ()
+        {
+            return LastName;
+        }
     }
 }
