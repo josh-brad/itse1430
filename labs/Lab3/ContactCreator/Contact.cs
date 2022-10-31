@@ -33,24 +33,6 @@ namespace ContactCreator
 
         public bool IsFavorite { get; set; }
 
-        public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
-        {
-            var errors = new List<ValidationResult>();
-            if (FirstName.Length == 0)
-                errors.Add(new ValidationResult("Title is required", new[] { nameof(FirstName) }));
-
-            if (LastName.Length == 0)
-                errors.Add(new ValidationResult("Rating is required", new[] { nameof(LastName) }));
-
-            if (Email.Length == 0)
-                errors.Add(new ValidationResult("RunLength is required", new[] { nameof(Email) }));
-
-            if (Notes.Length == 0)
-                errors.Add(new ValidationResult("RunLength is required", new[] { nameof(Notes) }));
-
-            return errors;
-        }
-
         public int Id { get; set; }
 
 
@@ -70,6 +52,23 @@ namespace ContactCreator
             contact.Email = Email;
             contact.Notes = Notes;
             contact.IsFavorite = IsFavorite;
+        }
+        public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
+        {
+            var errors = new List<ValidationResult>();
+            if (LastName.Length == 0)
+                errors.Add(new ValidationResult("Title is required", new[] { nameof(LastName) }));
+
+            if (FirstName.Length == 0)
+                errors.Add(new ValidationResult("Rating is required", new[] { nameof(FirstName) }));
+
+            if (Notes.Length == 0)
+                errors.Add(new ValidationResult("RunLength is required", new[] { nameof(Notes) }));
+
+            if (Email.Length == 0)
+                errors.Add(new ValidationResult("Release Year must be >= 1900", new[] { nameof(Email) }));
+
+            return errors;
         }
     }
 }

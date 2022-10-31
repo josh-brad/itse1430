@@ -10,37 +10,33 @@ namespace ContactCreator
     {
         public ContactDatabase ()
         {
-            var movie = new Movie() {
-                Title = "Dune",
-                Rating = "PG",
-                RunLength = 210,
-                ReleaseYear = 1977,
-                Description = "Worm eat",
-                IsClassic = true,
+            var contact = new Contact() {
+                FirstName = "Dune",
+                LastName = "PG",
+                Notes = "asdasdas",
+                Email = "Worm eat",
+                IsFavorite = true,
             };
-            Add(movie, out var error);
+            Add(contact, out var error);
 
-            movie = new Movie() {
-                Title = "Jaws",
-                Rating = "PG",
-                RunLength = 210,
-                ReleaseYear = 1977,
-                Description = "Shaek eat",
-                IsClassic = true,
+            contact = new Contact() {
+                FirstName = "Dune",
+                LastName = "PG",
+                Notes = "asdasdas",
+                Email = "Worm eat",
+                IsFavorite = true,
             };
-            Add(movie, out error);
+            Add(contact, out error);
 
-            movie = new Movie() {
-                Title = "Jaws 2",
-                Rating = "PG",
-                RunLength = 210,
-                ReleaseYear = 1977,
-                Description = "Shaek eat",
-                IsClassic = true,
+            contact = new Contact() {
+                FirstName = "Dune",
+                LastName = "PG",
+                Notes = "asdasdas",
+                Email = "Worm eat",
+                IsFavorite = true,
             };
-            Add(movie, out error);
+            Add(contact, out error);
         }
-        //TODO: Seed database
 
         /// <summary>Adds a movie to the database.</summary>
         /// <param name="movie">The movie to add.</param>
@@ -59,10 +55,9 @@ namespace ContactCreator
                 return null;
             };
 
-            if (!new ObjectValidator().IsValid(contact, out errorMessage))
-                return null;
+            //if (!new ObjectValidator().IsValid(contact, out errorMessage))
+            //    return null;
 
-            //Must be unique
             var existing = FindByTitle(contact.LastName);
             if (existing != null)
             {
@@ -70,9 +65,8 @@ namespace ContactCreator
                 return null;
             };
 
-            //Add
             contact.Id = _id++;
-            _movies.Add(contact.Clone());
+            _contacts.Add(contact.Clone());
 
             errorMessage = null;
             return contact;
@@ -85,9 +79,9 @@ namespace ContactCreator
         /// Fails if:
         ///    - Id is less than 1
         /// </remarks>
-        public Movie Get ( int id )
+        public Contact Get ( int id )
         {
-            foreach (var movie in _movies)
+            foreach (var movie in _contacts)
                 if (movie?.Id == id)
                     return movie.Clone();
 
@@ -96,62 +90,50 @@ namespace ContactCreator
 
         /// <summary>Gets all the movies.</summary>
         /// <returns>The movies.</returns>
-        public Movie[] GetAll ()
+        public Contact[] GetAll ()
         {
-            var items = new Movie[_movies.Count];
+            var items = new Contact[_contacts.Count];
             var index = 0;
-            foreach (var movie in _movies)
-                items[index++] = movie.Clone();
-
-            //Empty array
-            //new Movie[0];
-
+            foreach (var contact in _contacts)
+                items[index++] = contact.Clone();
             return items;
         }
 
         public void Remove ( int id )
         {
-            //TODO: Switch to foreach
-            //Enumerate array looking for match
-            for (var index = 0; index < _movies.Count; ++index)
-                if (_movies[index]?.Id == id)
+
+            for (var index = 0; index < _contacts.Count; ++index)
+                if (_contacts[index]?.Id == id)
                 {
-                    //_movies[index] = null;
-                    _movies.RemoveAt(index);
+                    _contacts.RemoveAt(index);
                     return;
                 };
         }
 
-        public bool Update ( int id, Movie movie, out string errorMessage )
+        public bool Update ( int id, Contact contact, out string errorMessage )
         {
-            //Validate movie
-            if (movie == null)
+            if (contact == null)
             {
                 errorMessage = "Movie cannot be null";
                 return false;
             };
-            if (!new ObjectValidator().IsValid(movie, out errorMessage))
-                return false;
+            //if (!new ObjectValidator().IsValid(contact, out errorMessage))
+            //    return false;
 
-            //Movie must already exist
-            var oldMovie = FindById(id);
-            if (oldMovie == null)
+            var oldContact = FindByLastName(id);
+            if (oldContact == null)
             {
                 errorMessage = "Movie does not exist";
                 return false;
             };
-
-            //Must be unique
-            var existing = FindByTitle(movie.Title);
+            var existing = FindByTitle(contact.LastName);
             if (existing != null && existing.Id != id)
             {
                 errorMessage = "Movie must be unique";
                 return false;
             };
-
-            //Copy 
-            movie.CopyTo(oldMovie);
-            oldMovie.Id = id;
+            contact.CopyTo(oldContact);
+            oldContact.Id = id;
 
             errorMessage = null;
             return true;
@@ -159,26 +141,26 @@ namespace ContactCreator
 
         #region Private Members
 
-        private Movie FindById ( int id )
+        private Contact FindByLastName ( int id )
         {
-            foreach (var movie in _movies)
+            foreach (var movie in _contacts)
                 if (movie.Id == id)
                     return movie;
 
             return null;
         }
 
-        private Movie FindByTitle ( string title )
+        private Contact FindByTitle ( string lastName )
         {
-            foreach (var movie in _movies)
-                if (String.Equals(movie.Title, title, StringComparison.OrdinalIgnoreCase))
-                    return movie;
+            foreach (var contact in _contacts)
+                if (String.Equals(contact.LastName, lastName, StringComparison.OrdinalIgnoreCase))
+                    return contact;
 
             return null;
         }
 
         private int _id = 1;
-        private List<Movie> _movies = new List<Movie>();
+        private List<Contact> _contacts = new List<Contact>();
         #endregion
     }
 }

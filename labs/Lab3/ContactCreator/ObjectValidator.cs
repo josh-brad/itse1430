@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ContactCreator
 {
-    internal class ObjectValidator
+    public class ObjectValidator
     {
         public bool IsValid ( IValidatableObject instance, out string errorMessage )
         {
