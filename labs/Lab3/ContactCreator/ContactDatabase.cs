@@ -36,6 +36,15 @@ namespace ContactCreator
                 IsFavorite = true,
             };
             Add(contact, out error);
+
+            contact = new Contact() {
+                FirstName = "Uglyer",
+                LastName = "Idunno",
+                Notes = "Garbage Collector",
+                Email = "sewageisfun@sdkfjslkadjhf.com",
+                IsFavorite = false,
+            };
+            Add(contact, out error);
         }
 
         /// <summary>Adds a contact to the database.</summary>

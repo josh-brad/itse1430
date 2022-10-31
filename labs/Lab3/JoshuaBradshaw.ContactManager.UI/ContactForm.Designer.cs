@@ -79,7 +79,6 @@
             this._textFirstName.Name = "_textFirstName";
             this._textFirstName.Size = new System.Drawing.Size(156, 23);
             this._textFirstName.TabIndex = 0;
-            this._textFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateFirstName);
             // 
             // _textLastName
             // 

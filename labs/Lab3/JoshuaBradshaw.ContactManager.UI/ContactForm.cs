@@ -77,19 +77,6 @@ namespace JoshuaBradshaw.ContactManager.UI
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void OnValidateFirstName ( object sender, CancelEventArgs e )
-        {
-            var control = sender as TextBox;
-
-            if (String.IsNullOrEmpty(control.Text))
-            {
-                _errors.SetError(control, "First Name is Required");
-                e.Cancel = true;
-            } else
-            {
-                _errors.SetError(control, "");
-            }
-        }
         private void OnValidateLastName ( object sender, CancelEventArgs e )
         {
             var control = sender as TextBox;
