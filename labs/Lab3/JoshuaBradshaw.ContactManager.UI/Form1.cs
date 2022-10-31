@@ -35,18 +35,16 @@ namespace JoshuaBradshaw.ContactManager.UI
 
         #region Event Handlers
 
-        //Called to handle Movies\Add
-        private void OnMovieAdd ( object sender, EventArgs e )
+        private void OnContactAdd ( object sender, EventArgs e )
         {
             var child = new ContactForm();
 
             do
             {
-                //Showing form modally
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
 
-                if (_contacts.Add(child.SelectedMovie, out var error) != null)
+                if (_contacts.Add(child.SelectedContact, out var error) != null)
                 {
                     UpdateUI();
                     return;
@@ -56,34 +54,34 @@ namespace JoshuaBradshaw.ContactManager.UI
             } while (true);
         }
 
-        private void OnMovieDelete ( object sender, EventArgs e )
+        private void OnContactDelete ( object sender, EventArgs e )
         {
-            var movie = GetSelectedMovie();
-            if (movie == null)
+            var contact = GetSelectedContact();
+            if (contact == null)
                 return;
 
-            if (!Confirm($"Are you sure you want to delete '{movie.LastName}'?", "Delete"))
+            if (!Confirm($"Are you sure you want to delete '{contact.LastName}'?", "Delete"))
                 return;
 
-            _contacts.Remove(movie.Id);
+            _contacts.Remove(contact.Id);
             UpdateUI();
         }
 
-        private void OnMovieEdit ( object sender, EventArgs e )
+        private void OnContactEdit ( object sender, EventArgs e )
         {
-            var movie = GetSelectedMovie();
-            if (movie == null)
+            var contact = GetSelectedContact();
+            if (contact == null)
                 return;
 
             var child = new ContactForm();
-            child.SelectedMovie = movie;
+            child.SelectedContact = contact;
 
             do
             {
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
 
-                if (_contacts.Update(movie.Id, child.SelectedMovie, out var error))
+                if (_contacts.Update(contact.Id, child.SelectedContact, out var error))
                 {
                     UpdateUI();
                     return;
@@ -117,7 +115,7 @@ namespace JoshuaBradshaw.ContactManager.UI
             _listContacts.Items.AddRange(movies);
         }
 
-        private Contact GetSelectedMovie ()
+        private Contact GetSelectedContact ()
         {
             return _listContacts.SelectedItem as Contact;
         }
@@ -134,7 +132,7 @@ namespace JoshuaBradshaw.ContactManager.UI
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private Contact _movie;
+        private Contact _contact;
         private ContactDatabase _contacts = new ContactDatabase();
         #endregion
 

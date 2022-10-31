@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,19 +23,19 @@ namespace JoshuaBradshaw.ContactManager.UI
         }
 
 
-        public Contact SelectedMovie { get; set; }
+        public Contact SelectedContact { get; set; }
 
         protected override void OnLoad ( EventArgs e )
         {
             base.OnLoad(e);
 
-            if (SelectedMovie != null)
+            if (SelectedContact != null)
             {
-                _textFirstName.Text = SelectedMovie.FirstName;
-                _textLastName.Text = SelectedMovie.LastName;
-                _textEmail.Text = SelectedMovie.Email;
-                _checkIsFavorite.Checked = SelectedMovie.IsFavorite;
-                _textNotes.Text = SelectedMovie.Notes;
+                _textFirstName.Text = SelectedContact.FirstName;
+                _textLastName.Text = SelectedContact.LastName;
+                _textEmail.Text = SelectedContact.Email;
+                _checkIsFavorite.Checked = SelectedContact.IsFavorite;
+                _textNotes.Text = SelectedContact.Notes;
             };
             if (!ValidateChildren())
                 return;
@@ -60,7 +61,7 @@ namespace JoshuaBradshaw.ContactManager.UI
             //    return;
             //};
 
-            SelectedMovie = contact;
+            SelectedContact = contact;
             DialogResult = DialogResult.OK;
             Close();
         }
@@ -76,26 +77,26 @@ namespace JoshuaBradshaw.ContactManager.UI
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void OnValidateTitle ( object sender, CancelEventArgs e )
+        private void OnValidateFirstName ( object sender, CancelEventArgs e )
         {
             var control = sender as TextBox;
 
             if (String.IsNullOrEmpty(control.Text))
             {
-                _errors.SetError(control, "Title is Required");
+                _errors.SetError(control, "First Name is Required");
                 e.Cancel = true;
             } else
             {
                 _errors.SetError(control, "");
             }
         }
-        private void OnValidateRating ( object sender, CancelEventArgs e )
+        private void OnValidateLastName ( object sender, CancelEventArgs e )
         {
-            var control = sender as ComboBox;
+            var control = sender as TextBox;
 
             if (String.IsNullOrEmpty(control.Text))
             {
-                _errors.SetError(control, "Rating is Required");
+                _errors.SetError(control, "Last Name is required");
                 e.Cancel = true;
             } else
             {
@@ -103,13 +104,13 @@ namespace JoshuaBradshaw.ContactManager.UI
             }
         }
 
-        private void OnValidateReleaseYear ( object sender, CancelEventArgs e )
+        private void OnValidateEmail ( object sender, CancelEventArgs e )
         {
             var control = sender as TextBox;
-            var value = GetInt32(control);
-            if (value < 1900)
+
+            if (!IsValidEmail(control.Text))
             {
-                _errors.SetError(control, "Release Year must be at least 1900");
+                _errors.SetError(control, "Not a vaild email");
                 e.Cancel = true;
             } else
             {
@@ -117,19 +118,9 @@ namespace JoshuaBradshaw.ContactManager.UI
             }
         }
 
-        private void OnValidateRunLength ( object sender, CancelEventArgs e )
+        bool IsValidEmail ( string source )
         {
-            var control = sender as TextBox;
-            var value = GetInt32(control);
-
-            if (value < 0)
-            {
-                _errors.SetError(control, "Run Length must be >= 0");
-                e.Cancel = true;
-            } else
-            {
-                _errors.SetError(control, "");
-            }
+            return MailAddress.TryCreate(source, out var address);
         }
     }
 }

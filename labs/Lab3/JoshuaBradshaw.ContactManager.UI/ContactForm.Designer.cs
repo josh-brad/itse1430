@@ -65,7 +65,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(34, 94);
+            this.label3.Location = new System.Drawing.Point(60, 91);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 15);
             this.label3.TabIndex = 2;
@@ -77,6 +77,7 @@
             this._textFirstName.Name = "_textFirstName";
             this._textFirstName.Size = new System.Drawing.Size(100, 23);
             this._textFirstName.TabIndex = 3;
+            this._textFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateFirstName);
             // 
             // _textLastName
             // 
@@ -84,11 +85,12 @@
             this._textLastName.Name = "_textLastName";
             this._textLastName.Size = new System.Drawing.Size(100, 23);
             this._textLastName.TabIndex = 4;
+            this._textLastName.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateLastName);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(34, 127);
+            this.label4.Location = new System.Drawing.Point(58, 127);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(38, 15);
             this.label4.TabIndex = 5;
@@ -110,6 +112,7 @@
             this._textEmail.Name = "_textEmail";
             this._textEmail.Size = new System.Drawing.Size(100, 23);
             this._textEmail.TabIndex = 7;
+            this._textEmail.Validating += new System.ComponentModel.CancelEventHandler(this.OnValidateEmail);
             // 
             // _textNotes
             // 
@@ -120,6 +123,7 @@
             // 
             // _errors
             // 
+            this._errors.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
             this._errors.ContainerControl = this;
             // 
             // _btnSave
