@@ -116,7 +116,9 @@ namespace MovieLibrary.WinHost
             var movies = _movies.GetAll();
 
             _listMovies.Items.Clear();
-            _listMovies.Items.AddRange(movies);
+            //_listMovies.Items.AddRange(movies);
+            foreach(var movie in movies)
+                _listMovies.Items.Add(movie);
         }
 
         private Movie GetSelectedMovie ()
@@ -136,8 +138,7 @@ namespace MovieLibrary.WinHost
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private Movie _movie;
-        private MovieDatabase _movies = new MovieDatabase();
+        private IMovieDatabase _movies = new MovieLibary.Memory.MemoryMovieDatabase();
         #endregion        
     }
 }
