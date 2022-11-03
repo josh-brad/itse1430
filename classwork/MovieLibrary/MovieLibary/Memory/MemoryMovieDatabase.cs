@@ -8,48 +8,6 @@ namespace MovieLibary.Memory
 {
     public class MemoryMovieDatabase : MovieDatabase
     {
-
-        public MemoryMovieDatabase ()
-        {
-            //var movie = new Movie();
-            //movie.Title = "Jaws";
-            //movie.Rating = "PG";
-            //movie.RunLength = 210;
-            //movie.Description = "Shaek eat";
-            //movie.IsClassic = true;
-            //Add(movie, out var error);
-
-            var movie = new Movie() {
-                Title = "Dune",
-                Rating = "PG",
-                RunLength = 210,
-                ReleaseYear = 1977,
-                Description = "Worm eat",
-                IsClassic = true,
-            };
-            Add(movie, out var error);
-
-            movie = new Movie() {
-                Title = "Jaws",
-                Rating = "PG",
-                RunLength = 210,
-                ReleaseYear = 1977,
-                Description = "Shaek eat",
-                IsClassic = true,
-            };
-            Add(movie, out error);
-
-            movie = new Movie() {
-                Title = "Jaws 2",
-                Rating = "PG",
-                RunLength = 210,
-                ReleaseYear = 1977,
-                Description = "Shaek eat",
-                IsClassic = true,
-            };
-            Add(movie, out error);
-        }
-
         protected override Movie AddCore ( Movie movie )
         {  
             movie.Id = _id++;

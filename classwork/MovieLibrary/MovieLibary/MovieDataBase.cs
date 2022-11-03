@@ -29,7 +29,7 @@ namespace MovieLibary
                 return null;
             };
 
-            if (!new ObjectValidator().IsValid(movie, out errorMessage))
+            if (!ObjectValidator.IsValid(movie, out errorMessage))
                 return null;
 
             //Must be unique
@@ -101,7 +101,7 @@ namespace MovieLibary
                 errorMessage = "Movie cannot be null";
                 return false;
             };
-            if (!new ObjectValidator().IsValid(movie, out errorMessage))
+            if (!ObjectValidator.IsValid(movie, out errorMessage))
                 return false;
 
             //Movie must already exist

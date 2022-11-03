@@ -32,7 +32,7 @@ namespace MovieLibrary.WinHost
         {
             base.OnLoad(e);
 
-            UpdateUI();
+            UpdateUI(true);
         }
 
         #region Event Handlers
@@ -109,20 +109,47 @@ namespace MovieLibrary.WinHost
         #endregion
 
         #region Private Members
-
         private void UpdateUI ()
         {
-            //Get movies
-            var movies = _movies.GetAll();
-
+            UpdateUI(false);
+        }
+        private void UpdateUI (bool intialLoad)
+        {
+            //Enumerable.Count(movies) == movies.Count()
+            var movies = _movies.GetAll();           
+            if(intialLoad && 
+                //movies.Count() == 0)
+                //movies.FirstOrDefault() == null)
+                movies.Any())
+            {
+                if (Confirm("Do you want to seed some movies?", "Database Empty"))
+                {
+                    _movies.Seed();
+                    movies = _movies.GetAll();
+                }
+            };
             _listMovies.Items.Clear();
-            //_listMovies.Items.AddRange(movies);
-            foreach(var movie in movies)
-                _listMovies.Items.Add(movie);
+            var items = movies.OrderBy(OrderByTitle)
+                              .ThenBy(OrderByReleaseYear)
+                              .ToArray();
+            //movies = movies.ThenBy();
+            _listMovies.Items.AddRange(items);
+            
+        }
+
+        private int OrderByReleaseYear(Movie movie )
+        {
+            return movie.ReleaseYear;
+        }
+        private string OrderByTitle(Movie movie)
+        {
+            return movie.Title;
         }
 
         private Movie GetSelectedMovie ()
         {
+            //var allTextBoxes = Controls.OfType<TextBox>();
+            //IEnumerable<Movie> temp = _listMovies.SelectedItems.OfType<Movie>();
             return _listMovies.SelectedItem as Movie;
         }
 
