@@ -18,35 +18,35 @@ namespace MovieLibary.Memory
 
         protected override Movie GetCore ( int id )
         {
-            foreach (var movie in _movies)
-                if (movie?.Id == id)
-                    return movie.Clone();  
+            return _movies.FirstOrDefault(x => x.Id == id)?.Clone();
+            //foreach (var movie in _movies)
+            //    if (movie?.Id == id)
+            //        return movie.Clone();  
 
-            return null;
+            //return null;
         }
 
 
         protected override IEnumerable<Movie> GetAllCore ()
         {
-            foreach (var movie in _movies)
-            {
-                yield return movie.Clone();
-            }
+            //return _movies.Select(x => x.Clone());
+            //LINQ Syntax
+            return from movie in _movies
+                   orderby movie.Title, movie.ReleaseYear
+                   select movie.Clone();
+
+            //foreach (var movie in _movies)
+            //{
+            //    yield return movie.Clone();
+            //}
 
             //return items;
         }
 
         protected override void RemoveCore ( int id )
         {
-            //TODO: Switch to foreach
-            //Enumerate array looking for match
-            for (var index = 0; index < _movies.Count; ++index)
-                if (_movies[index]?.Id == id)
-                {
-                    //_movies[index] = null;
-                    _movies.RemoveAt(index);
-                    return;
-                };
+            var movie = FindById(id);
+            _movies.Remove(movie);
         }
 
         protected override void UpdateCore ( int id, Movie movie)
@@ -60,20 +60,17 @@ namespace MovieLibary.Memory
 
         private Movie FindById ( int id )
         {
-            foreach (var movie in _movies)
-                if (movie.Id == id)
-                    return movie;
-
-            return null;
+            return _movies.FirstOrDefault(x => x.Id == id);
         }
 
         protected override Movie FindByTitle ( string title )
         {
-            foreach (var movie in _movies)
-                if (String.Equals(movie.Title, title, StringComparison.OrdinalIgnoreCase))
-                    return movie;
+            return _movies.FirstOrDefault(x => String.Equals(x.Title, title, StringComparison.OrdinalIgnoreCase));
+            //foreach (var movie in _movies)
+            //    if (String.Equals(movie.Title, title, StringComparison.OrdinalIgnoreCase))
+            //        return movie;
 
-            return null;
+            //return null;
         }
 
         private int _id = 1;

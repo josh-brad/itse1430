@@ -113,6 +113,7 @@ namespace MovieLibrary.WinHost
         {
             UpdateUI(false);
         }
+
         private void UpdateUI (bool intialLoad)
         {
             //Enumerable.Count(movies) == movies.Count()
@@ -129,21 +130,12 @@ namespace MovieLibrary.WinHost
                 }
             };
             _listMovies.Items.Clear();
-            var items = movies.OrderBy(OrderByTitle)
-                              .ThenBy(OrderByReleaseYear)
+            var items = movies.OrderBy(x => x.Title)
+                              .ThenBy(x => x.ReleaseYear)
                               .ToArray();
             //movies = movies.ThenBy();
             _listMovies.Items.AddRange(items);
             
-        }
-
-        private int OrderByReleaseYear(Movie movie )
-        {
-            return movie.ReleaseYear;
-        }
-        private string OrderByTitle(Movie movie)
-        {
-            return movie.Title;
         }
 
         private Movie GetSelectedMovie ()
