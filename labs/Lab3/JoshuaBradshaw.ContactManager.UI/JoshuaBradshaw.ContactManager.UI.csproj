@@ -6,6 +6,8 @@
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Contact Library</AssemblyName>
+    <RootNamespace>Joshua Bradshaw</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

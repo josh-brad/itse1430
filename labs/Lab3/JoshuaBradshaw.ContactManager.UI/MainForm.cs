@@ -1,3 +1,6 @@
+//ISTE 1430
+//Joshua Bradshaw
+//11-9-22
 using ContactCreator;
 using Microsoft.VisualBasic.Devices;
 
@@ -134,7 +137,7 @@ namespace JoshuaBradshaw.ContactManager.UI
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private ContactDatabase _contacts = new ContactDatabase();
+        private IContactDatabase _contacts = new ContactDatabase();
         #endregion
 
     }
