@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ContactCreator
 {
-    public class ContactDatabase
+    public class ContactDatabase : IContactDatabase
     {
         public ContactDatabase ()
         {
             var contact = new Contact() {
                 FirstName = "Tim",
-                LastName = "Bobby",
+                LastName = "Cook",
                 Notes = "CEO of Google",
                 Email = "timcook@gmail.com",
                 IsFavorite = true,
@@ -64,8 +65,8 @@ namespace ContactCreator
                 return null;
             };
 
-            //if (!new ObjectValidator().IsValid(contact, out errorMessage))
-            //    return null;
+            if (!ObjectValidator.IsValid(contact, out errorMessage))
+                return null;
 
             var existing = FindByTitle(contact.LastName);
             if (existing != null)
@@ -99,13 +100,11 @@ namespace ContactCreator
 
         /// <summary>Gets all the contacts.</summary>
         /// <returns>The contacts.</returns>
-        public Contact[] GetAll ()
+        public IEnumerable<Contact> GetAll ()
         {
-            var items = new Contact[_contacts.Count];
-            var index = 0;
-            foreach (var contact in _contacts)
-                items[index++] = contact.Clone();
-            return items;
+            return from contact in _contacts
+                   orderby contact.LastName, contact.FirstName
+                   select contact.Clone();
         }
 
         public void Remove ( int id )
@@ -126,8 +125,9 @@ namespace ContactCreator
                 errorMessage = "Contact cannot be null";
                 return false;
             };
-            //if (!new ObjectValidator().IsValid(contact, out errorMessage))
-            //    return false;
+
+            if (!ObjectValidator.IsValid(contact, out errorMessage))
+                return false;
 
             var oldContact = FindByLastName(id);
             if (oldContact == null)

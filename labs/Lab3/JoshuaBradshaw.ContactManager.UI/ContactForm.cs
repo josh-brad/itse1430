@@ -47,7 +47,6 @@ namespace JoshuaBradshaw.ContactManager.UI
                 return;
 
             var btn = sender as Button;
-
             var contact = new Contact();
             contact.LastName = _textLastName.Text;
             contact.FirstName = _textFirstName.Text;
@@ -55,11 +54,11 @@ namespace JoshuaBradshaw.ContactManager.UI
             contact.Notes = _textNotes.Text;
             contact.IsFavorite = _checkIsFavorite.Checked;
 
-            //if (!new ObjectValidator().IsValid(contact, out var error))
-            //{
-            //    DisplayError(error, "Save");
-            //    return;
-            //};
+            if (!ObjectValidator.IsValid(contact, out var error))
+            {
+                DisplayError(error, "Save");
+                return;
+            };
 
             SelectedContact = contact;
             DialogResult = DialogResult.OK;

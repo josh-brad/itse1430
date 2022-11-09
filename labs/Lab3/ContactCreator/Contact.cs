@@ -2,7 +2,7 @@
 
 namespace ContactCreator
 {
-    public class Contact
+    public class Contact : IValidatableObject
     {
         public string FirstName
         {
@@ -69,6 +69,7 @@ namespace ContactCreator
                 errors.Add(new ValidationResult("Release Year must be >= 1900", new[] { nameof(Email) }));
 
             return errors;
+
         }
 
         public override string ToString ()

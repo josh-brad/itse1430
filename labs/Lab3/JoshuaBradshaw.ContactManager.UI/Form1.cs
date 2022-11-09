@@ -107,10 +107,13 @@ namespace JoshuaBradshaw.ContactManager.UI
 
         private void UpdateUI ()
         {
-            var contacts = _contacts.GetAll();
-
+            var movies = _contacts.GetAll();
             _listContacts.Items.Clear();
-            _listContacts.Items.AddRange(contacts);
+            var items = movies.OrderBy(x => x.LastName)
+                              .ThenBy(x => x.FirstName)
+                              .ToArray();
+
+            _listContacts.Items.AddRange(items);
         }
 
         private Contact GetSelectedContact ()
