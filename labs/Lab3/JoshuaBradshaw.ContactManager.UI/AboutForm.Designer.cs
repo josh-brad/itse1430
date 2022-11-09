@@ -88,7 +88,7 @@
             this.labelProductName.Name = "labelProductName";
             this.labelProductName.Size = new System.Drawing.Size(316, 20);
             this.labelProductName.TabIndex = 19;
-            this.labelProductName.Text = "Product Name";
+            this.labelProductName.Text = "Contact Library";
             this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelVersion
@@ -100,7 +100,7 @@
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(316, 20);
             this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = "Version";
+            this.labelVersion.Text = "Version 1.0.0.0";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelCopyright
@@ -117,14 +117,13 @@
             // 
             // labelCompanyName
             // 
-            this.labelCompanyName.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelCompanyName.Location = new System.Drawing.Point(167, 90);
             this.labelCompanyName.Margin = new System.Windows.Forms.Padding(7, 0, 4, 0);
             this.labelCompanyName.MaximumSize = new System.Drawing.Size(0, 20);
             this.labelCompanyName.Name = "labelCompanyName";
             this.labelCompanyName.Size = new System.Drawing.Size(316, 20);
             this.labelCompanyName.TabIndex = 22;
-            this.labelCompanyName.Text = "Company Name";
+            this.labelCompanyName.Text = "Joshua Bradshaw";
             this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBoxDescription

@@ -35,7 +35,6 @@ namespace ContactCreator
 
         public int Id { get; set; }
 
-
         public Contact Clone ()
         {
             var contact = new Contact();
@@ -53,17 +52,18 @@ namespace ContactCreator
             contact.Notes = Notes;
             contact.IsFavorite = IsFavorite;
         }
+
         public IEnumerable<ValidationResult> Validate ( ValidationContext validationContext )
         {
             var errors = new List<ValidationResult>();
             if (LastName.Length == 0)
                 errors.Add(new ValidationResult("Lastname is required", new[] { nameof(LastName) }));
 
-            if (FirstName.Length == 0)
-                errors.Add(new ValidationResult("Firstname is required", new[] { nameof(FirstName) }));
+            //if (FirstName.Length == 0)
+            //    errors.Add(new ValidationResult("Firstname is required", new[] { nameof(FirstName) }));
 
-            if (Notes.Length == 0)
-                errors.Add(new ValidationResult("Notes is required", new[] { nameof(Notes) }));
+            //if (Notes.Length == 0)
+            //    errors.Add(new ValidationResult("Notes is required", new[] { nameof(Notes) }));
 
             if (Email.Length == 0)
                 errors.Add(new ValidationResult("Email is required", new[] { nameof(Email) }));
@@ -73,8 +73,8 @@ namespace ContactCreator
         }
 
         public override string ToString ()
-        {
-            return LastName;
+        {            
+            return (FirstName.PadRight(10,' ') + LastName.PadRight(10, ' ') + Email);
         }
     }
 }

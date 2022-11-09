@@ -65,12 +65,6 @@ namespace JoshuaBradshaw.ContactManager.UI
             Close();
         }
 
-        private int GetInt32 ( TextBox control )
-        {
-            if (Int32.TryParse(control.Text, out int value))
-                return value;
-            return -1;
-        }
         private void DisplayError ( string message, string title )
         {
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
