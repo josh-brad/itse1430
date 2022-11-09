@@ -57,16 +57,16 @@ namespace ContactCreator
         {
             var errors = new List<ValidationResult>();
             if (LastName.Length == 0)
-                errors.Add(new ValidationResult("Title is required", new[] { nameof(LastName) }));
+                errors.Add(new ValidationResult("Lastname is required", new[] { nameof(LastName) }));
 
             if (FirstName.Length == 0)
-                errors.Add(new ValidationResult("Rating is required", new[] { nameof(FirstName) }));
+                errors.Add(new ValidationResult("Firstname is required", new[] { nameof(FirstName) }));
 
             if (Notes.Length == 0)
-                errors.Add(new ValidationResult("RunLength is required", new[] { nameof(Notes) }));
+                errors.Add(new ValidationResult("Notes is required", new[] { nameof(Notes) }));
 
             if (Email.Length == 0)
-                errors.Add(new ValidationResult("Release Year must be >= 1900", new[] { nameof(Email) }));
+                errors.Add(new ValidationResult("Email is required", new[] { nameof(Email) }));
 
             return errors;
 
