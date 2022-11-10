@@ -48,13 +48,25 @@ namespace MovieLibrary.WinHost
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
 
-                if (_movies.Add(child.SelectedMovie, out var error) != null)
+                try
                 {
+
+                    _movies.Add(child.SelectedMovie);
                     UpdateUI();
                     return;
-                };
 
-                DisplayError(error, "Add Failed");
+
+                }
+                catch (ArgumentException ex)
+                {
+                    DisplayError("You messed up deveolper.", "Add Failed");
+                } catch (InvalidOperationException ex)
+                {
+                    DisplayError("Movies must be unique.", "Add Failed");
+                }catch (Exception ex)
+                {
+                    DisplayError(ex.Message, "Add Failed");
+                }
             } while (true);
         }
 
@@ -66,8 +78,13 @@ namespace MovieLibrary.WinHost
 
             if (!Confirm($"Are you sure you want to delete '{movie.Title}'?", "Delete"))
                 return;
-
-            _movies.Remove(movie.Id);
+            try
+            {
+                _movies.Remove(movie.Id);
+            }catch(Exception ex)
+            {
+                DisplayError(ex.Message, "Delete Failed");
+            }
             UpdateUI();
         }
 
@@ -84,14 +101,16 @@ namespace MovieLibrary.WinHost
             {
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
-
-                if (_movies.Update(movie.Id, child.SelectedMovie, out var error))
+                try
                 {
+                    _movies.Update(movie.Id, child.SelectedMovie);
                     UpdateUI();
-                    return;
-                };
-
-                DisplayError(error, "Update Failed");
+                        return;
+                    
+                }catch(Exception ex)
+                {
+                    DisplayError(ex.Message, "Update Failed");
+                }
             } while (true);
         }
 

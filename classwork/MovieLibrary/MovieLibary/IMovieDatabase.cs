@@ -2,10 +2,10 @@
 {
     public interface IMovieDatabase
     {
-        Movie Add ( Movie movie, out string errorMessage );
+        Movie Add ( Movie movie );
         Movie Get ( int id );
         IEnumerable<Movie> GetAll ();
         void Remove ( int id );
-        bool Update ( int id, Movie movie, out string errorMessage );
+        void Update ( int id, Movie movie);
     }
 }

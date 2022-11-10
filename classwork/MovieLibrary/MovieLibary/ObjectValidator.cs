@@ -21,5 +21,10 @@ namespace MovieLibary
             errorMessage = null;
             return true;
         }
+
+        public static void Validate (IValidatableObject instance )
+        {
+            Validator.ValidateObject(instance, new ValidationContext(instance));
+        }
     }
 }
