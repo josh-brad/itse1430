@@ -56,16 +56,17 @@ namespace MovieLibrary.WinHost
                     return;
 
 
-                }
-                catch (ArgumentException ex)
+                }catch (ArgumentException ex)
                 {
-                    DisplayError("You messed up deveolper.", "Add Failed");
-                } catch (InvalidOperationException ex)
+                    DisplayError("You messed up deveolper.", "Add Failed");     
+                }catch (InvalidOperationException ex)
                 {
                     DisplayError("Movies must be unique.", "Add Failed");
                 }catch (Exception ex)
                 {
                     DisplayError(ex.Message, "Add Failed");
+                    //throw ex;
+                    //throw;
                 }
             } while (true);
         }
@@ -103,14 +104,22 @@ namespace MovieLibrary.WinHost
                     return;
                 try
                 {
+                    Cursor = Cursors.WaitCursor;
                     _movies.Update(movie.Id, child.SelectedMovie);
+                    System.Threading.Thread.Sleep(1000);
+                    Cursor = Cursors.Default;
+
                     UpdateUI();
                         return;
                     
                 }catch(Exception ex)
                 {
+                    Cursor = Cursors.Default;
                     DisplayError(ex.Message, "Update Failed");
-                }
+                } finally
+                {
+                    Cursor = Cursors.Default;
+                };
             } while (true);
         }
 
@@ -140,7 +149,7 @@ namespace MovieLibrary.WinHost
             if(intialLoad && 
                 //movies.Count() == 0)
                 //movies.FirstOrDefault() == null)
-                movies.Any())
+                !movies.Any())
             {
                 if (Confirm("Do you want to seed some movies?", "Database Empty"))
                 {

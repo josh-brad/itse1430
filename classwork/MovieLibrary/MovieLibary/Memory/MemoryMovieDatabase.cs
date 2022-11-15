@@ -46,14 +46,16 @@ namespace MovieLibary.Memory
         protected override void RemoveCore ( int id )
         {
             var movie = FindById(id);
-            if (movie == null)
-                throw new NotSupportedException("Movie does not exist.");
+            if(movie != null)
+                _movies.Remove(movie);
             _movies.Remove(movie);
         }
 
         protected override void UpdateCore ( int id, Movie movie)
         {
             var oldMovie = FindById(id);
+            if (movie == null)
+                throw new NotSupportedException("Movie does not exist.");
             movie.CopyTo(oldMovie);
             oldMovie.Id = id;
         }
