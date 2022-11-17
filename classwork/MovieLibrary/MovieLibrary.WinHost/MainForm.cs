@@ -1,4 +1,5 @@
 using MovieLibary;
+using MovieLibary.Sql;
 
 namespace MovieLibrary.WinHost
 {
@@ -185,7 +186,7 @@ namespace MovieLibrary.WinHost
             MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private IMovieDatabase _movies = new MovieLibary.Memory.MemoryMovieDatabase();
+        private IMovieDatabase _movies = new MovieLibary.Sql.SqlMovieDatabase(Program.GetConnectionString("AppDatabase"));
         #endregion        
     }
 }
