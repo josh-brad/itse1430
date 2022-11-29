@@ -1,5 +1,4 @@
 using MovieLibary;
-using MovieLibary.Sql;
 
 namespace MovieLibrary.WinHost
 {
