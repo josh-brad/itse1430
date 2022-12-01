@@ -76,7 +76,7 @@ namespace MovieLibary.Sql
                         return new Movie() {
                             Id = (int)reader[0],
                             Title = reader["Name"] as string,
-                            Description = reader.GetString(2),
+                            Description = reader.IsDBNull(2) ? "" : reader.GetString(2),
                             Rating = reader.GetString("Rating"),
                             RunLength = reader.GetInt32("RunLength"),
                             ReleaseYear = reader.GetFieldValue<int>("ReleaseYear"),

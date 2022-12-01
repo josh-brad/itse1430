@@ -32,6 +32,7 @@ namespace MovieLibary
             var existing = FindByTitle(movie.Title);
             if (existing != null)
                 throw new InvalidOperationException("Movie title must be unique.");
+            movie.OldMethod();
 
             //Add
             movie = AddCore(movie);
