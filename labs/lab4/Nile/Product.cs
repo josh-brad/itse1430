@@ -1,6 +1,8 @@
 /*
  * ITSE 1430
  */
+using System.ComponentModel.DataAnnotations;
+
 namespace Nile
 {
     /// <summary>Represents a product.</summary>
@@ -11,6 +13,7 @@ namespace Nile
 
         /// <summary>Gets or sets the name.</summary>
         /// <value>Never returns null.</value>
+        [Required(AllowEmptyStrings = false)]
         public string Name
         {
             get { return _name ?? ""; }
@@ -25,6 +28,7 @@ namespace Nile
         }
 
         /// <summary>Gets or sets the price.</summary>
+        [Required]
         public decimal Price { get; set; } = 0;      
 
         /// <summary>Determines if discontinued.</summary>
