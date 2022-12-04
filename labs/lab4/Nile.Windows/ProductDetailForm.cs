@@ -68,6 +68,7 @@ namespace Nile.Windows
             };
 
             //Validate product
+            ObjectValidator.Validate(product);
 
             Product = product;
             DialogResult = DialogResult.OK;

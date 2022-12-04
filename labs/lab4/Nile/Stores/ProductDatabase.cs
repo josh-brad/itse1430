@@ -12,9 +12,12 @@ namespace Nile.Stores
             //TODO: Check arguments
             if (product == null)
                 throw new ArgumentNullException(nameof(product));
-
             //TODO: Validate product
             ObjectValidator.Validate(product);
+            var existing = FindByName(product.Name);
+           
+            if (existing != null)
+                throw new InvalidOperationException("Movie title must be unique.");
 
             //Emulate database by storing copy
             return AddCore(product);
@@ -57,7 +60,11 @@ namespace Nile.Stores
             ObjectValidator.Validate(product);
 
             //Get existing product
+            //New
+            var existingName = FindByName(product.Name);
             var existing = GetCore(product.Id);
+            if( existingName != null && product.Id != existingName.Id)
+                throw new InvalidOperationException("Product name must be unique.");
 
             return UpdateCore(existing, product);
         }
@@ -73,6 +80,9 @@ namespace Nile.Stores
         protected abstract Product UpdateCore( Product existing, Product newItem );
 
         protected abstract Product AddCore( Product product );
+
+        //New
+        protected abstract Product FindByName( string name );
         #endregion
     }
 }

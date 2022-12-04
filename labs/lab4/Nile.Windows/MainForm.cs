@@ -33,13 +33,24 @@ namespace Nile.Windows
         private void OnProductAdd( object sender, EventArgs e )
         {
             var child = new ProductDetailForm("Product Details");
-            if (child.ShowDialog(this) != DialogResult.OK)
-                return;
+            //new
+            do
+            {
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
 
-            //TODO: Handle errors
-            //Save product
-            _database.Add(child.Product);
-            UpdateList();
+                //TODO: Handle errors
+                try
+                {
+                    //Save product
+                    _database.Add(child.Product);
+                    UpdateList();
+                    return;
+                } catch (Exception ex)
+                {
+                    DisplayError(ex.Message, "Add Failed");
+                }
+            } while (true);
         }
 
         private void OnProductEdit( object sender, EventArgs e )
@@ -101,6 +112,11 @@ namespace Nile.Windows
         #endregion
 
         #region Private Members
+        //New
+        private void DisplayError ( string message, string title )
+        {
+            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
         private void DeleteProduct ( Product product )
         {
@@ -110,8 +126,15 @@ namespace Nile.Windows
                 return;
 
             //TODO: Handle errors
-            //Delete product
-            _database.Remove(product.Id);
+            
+            try
+            {
+                //Delete product
+                _database.Remove(product.Id);
+            }catch(Exception ex)
+            {
+                DisplayError(ex.Message, "Delete Failed");
+            }
             UpdateList();
         }
 
@@ -119,13 +142,24 @@ namespace Nile.Windows
         {
             var child = new ProductDetailForm("Product Details");
             child.Product = product;
-            if (child.ShowDialog(this) != DialogResult.OK)
-                return;
+            do
+            {
+                if (child.ShowDialog(this) != DialogResult.OK)
+                    return;
+                //TODO: Handle errors
+                try
+                {
+                    //Save product
+                    _database.Update(child.Product);
+                    UpdateList();
+                } catch (Exception ex)
+                {
+                    DisplayError(ex.Message, "Update Failed");
+                }
+            } while (true);
 
-            //TODO: Handle errors
-            //Save product
-            _database.Update(child.Product);
-            UpdateList();
+            
+            
         }
 
         private Product GetSelectedProduct ()
