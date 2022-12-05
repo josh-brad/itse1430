@@ -177,7 +177,8 @@ namespace Nile.Windows
             _bsProducts.DataSource = _database.GetAll();
         }
 
-        private readonly IProductDatabase _database = new SqlProductDatabase(Program.GetConnectionString("AppDatabase"));
+        private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+        //private readonly IProductDatabase _database = new Stores.Sql.SqlProductDatabase(Program.GetConnectionString("AppDatabase"));
         #endregion
 
 
