@@ -82,6 +82,9 @@ namespace Nile.Stores
             return null;
         }
 
+        protected override Product FindByName ( string name ) { return _products.FirstOrDefault(x => x.Name == name); }
+
+         
         private List<Product> _products = new List<Product>();
         private int _nextId = 1;
         #endregion
