@@ -1,6 +1,8 @@
 /*
  * ITSE 1430
  */
+using Nile.Stores.Sql;
+
 namespace Nile.Windows
 {
     public partial class MainForm : Form
@@ -177,8 +179,8 @@ namespace Nile.Windows
             _bsProducts.DataSource = _database.GetAll();
         }
 
-        private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
-        //private readonly IProductDatabase _database = new Stores.Sql.SqlProductDatabase(Program.GetConnectionString("AppDatabase"));
+        //private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
+        private readonly IProductDatabase _database = new SqlProductDatabase(Program.GetConnectionString("ProductDatabase"));
         #endregion
 
 

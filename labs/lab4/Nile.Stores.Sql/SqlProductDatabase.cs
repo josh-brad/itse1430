@@ -60,7 +60,7 @@ namespace Nile.Stores.Sql
 
             using (var conn = OpenConnection())
             {
-                var cmd = new SqlCommand("GetMovies", conn);
+                var cmd = new SqlCommand("GetAllProducts", conn);
                 var da = new SqlDataAdapter(cmd);
                 da.Fill(ds);
             }
