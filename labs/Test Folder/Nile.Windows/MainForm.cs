@@ -1,8 +1,6 @@
 /*
  * ITSE 1430
  */
-using Nile.Stores.Sql;
-
 namespace Nile.Windows
 {
     public partial class MainForm : Form
@@ -35,24 +33,13 @@ namespace Nile.Windows
         private void OnProductAdd( object sender, EventArgs e )
         {
             var child = new ProductDetailForm("Product Details");
-            //new
-            do
-            {
-                if (child.ShowDialog(this) != DialogResult.OK)
-                    return;
+            if (child.ShowDialog(this) != DialogResult.OK)
+                return;
 
-                //TODO: Handle errors
-                try
-                {
-                    //Save product
-                    _database.Add(child.Product);
-                    UpdateList();
-                    return;
-                } catch (Exception ex)
-                {
-                    DisplayError(ex.Message, "Add Failed");
-                }
-            } while (true);
+            //TODO: Handle errors
+            //Save product
+            _database.Add(child.Product);
+            UpdateList();
         }
 
         private void OnProductEdit( object sender, EventArgs e )
@@ -103,22 +90,10 @@ namespace Nile.Windows
 			//Don't continue with key
             e.SuppressKeyPress = true;
         }
-        private void OnHelpAbout ( object sender, EventArgs e )
-        {
-            var about = new AboutForm();
-
-            about.ShowDialog();
-
-        }
 
         #endregion
 
         #region Private Members
-        //New
-        private void DisplayError ( string message, string title )
-        {
-            MessageBox.Show(this, message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
 
         private void DeleteProduct ( Product product )
         {
@@ -128,15 +103,8 @@ namespace Nile.Windows
                 return;
 
             //TODO: Handle errors
-            
-            try
-            {
-                //Delete product
-                _database.Remove(product.Id);
-            }catch(Exception ex)
-            {
-                DisplayError(ex.Message, "Delete Failed");
-            }
+            //Delete product
+            _database.Remove(product.Id);
             UpdateList();
         }
 
@@ -144,30 +112,13 @@ namespace Nile.Windows
         {
             var child = new ProductDetailForm("Product Details");
             child.Product = product;
-            
-                if (child.ShowDialog(this) != DialogResult.OK)
-                    return;
-                //TODO: Handle errors
-                try
-                {
-                    //Save product
-                    _database.Update(child.Product);
-                    UpdateList();
-                    return;
-                } catch (ArgumentNullException ex)
-                {
-                    DisplayError(ex.Message, "Update Failed");
-                }catch (InvalidOperationException ex)
-                {
-                    DisplayError(ex.Message, "Update Failed");
-                } catch (Exception ex)
-                {
-                    DisplayError(ex.Message, "Update Failed");
-                }
-            
+            if (child.ShowDialog(this) != DialogResult.OK)
+                return;
 
-            
-            
+            //TODO: Handle errors
+            //Save product
+            _database.Update(child.Product);
+            UpdateList();
         }
 
         private Product GetSelectedProduct ()
@@ -181,14 +132,11 @@ namespace Nile.Windows
         private void UpdateList ()
         {
             //TODO: Handle errors
+
             _bsProducts.DataSource = _database.GetAll();
-            //_bsProducts.DataSource = _database.GetAll();
         }
 
-        //private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
-        private readonly IProductDatabase _database = new SqlProductDatabase(Program.GetConnectionString("ProductDatabase"));
+        private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
         #endregion
-
-
     }
 }

@@ -68,7 +68,6 @@
     <Build Include="Stored Procedures\GetAllProducts.sql" />
     <Build Include="Stored Procedures\GetProduct.sql" />
     <Build Include="Stored Procedures\RemoveProduct.sql" />
-    <Build Include="Stored Procedures\FindByName.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="InitializeProducts.PostDeployment.sql" />

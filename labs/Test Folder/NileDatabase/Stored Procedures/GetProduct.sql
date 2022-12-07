@@ -1,7 +1,9 @@
-CREATE PROCEDURE [dbo].[GetAllProducts]	
+CREATE PROCEDURE [dbo].[GetProduct]
+    @id INT
 AS BEGIN
     SET NOCOUNT ON;
 
     SELECT Id, Name, Price, Description, IsDiscontinued
-    FROM Products Order By Name asc
+    FROM Products
+    WHERE Id = @id
 END

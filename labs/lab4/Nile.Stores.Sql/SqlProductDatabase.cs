@@ -66,7 +66,7 @@ namespace Nile.Stores.Sql
             }
             //Data loaded, can work with it now
             var table = ds.Tables.OfType<DataTable>().FirstOrDefault();
-            if (table == null)
+            if (table != null)
             {
                 foreach (DataRow row in table.Rows.OfType<DataRow>())
                 {
@@ -110,7 +110,7 @@ namespace Nile.Stores.Sql
             return null;
         }
 
-        protected override Product UpdateCore ( Product id, Product product )
+        protected override Product UpdateCore ( Product existing, Product product )
         {
             using (var conn = OpenConnection())
             {
@@ -119,21 +119,44 @@ namespace Nile.Stores.Sql
                 cmd.Connection = conn;
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.AddWithValue("@id", existing.Id);
                 cmd.Parameters.AddWithValue("@name", product.Name);
                 cmd.Parameters.AddWithValue("@price", product.Price);
                 cmd.Parameters.AddWithValue("@description", product.Description);
                 cmd.Parameters.AddWithValue("@isDiscontinued", product.IsDiscontinued);
                 cmd.ExecuteNonQuery();
 
-                return id;
+                return existing;
             }
         }
 
         protected override Product FindByName ( string name )
         {
+
+            using (var conn = OpenConnection())
+            {
+                var cmd = new SqlCommand("FindByName", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@name", name);
+
+                //Read with streamed IO
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        return new Product() {
+                            Id = (int)reader[0],
+                            Description = reader.GetString("Description"),
+                            Name = reader.GetString("Name"),
+                            Price = reader.GetFieldValue<decimal>("Price"),
+                            IsDiscontinued = reader.GetFieldValue<bool>("IsDiscontinued"),
+                        };
+                    };
+                };
+            }
             return null;
         }
+
 
 
 
