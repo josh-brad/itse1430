@@ -1,4 +1,9 @@
-﻿using System.Data;
+﻿/*Joshua Bradshaw
+ * ITSE 1430
+ * Lab 4
+ * Fall 2022
+ */
+using System.Data;
 using System.Data.SqlClient;
 
 

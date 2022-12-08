@@ -1,5 +1,7 @@
-/*
+/*Joshua Bradshaw
  * ITSE 1430
+ * Lab 4
+ * Fall 2022
  */
 namespace Nile
 {

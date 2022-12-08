@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*Joshua Bradshaw
+ * ITSE 1430
+ * Lab 4
+ * Fall 2022
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
