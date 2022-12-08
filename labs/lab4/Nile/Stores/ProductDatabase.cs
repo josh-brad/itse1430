@@ -9,10 +9,10 @@ namespace Nile.Stores
         /// <inheritdoc />
         public Product Add ( Product product )
         {
-            //TODO: Check arguments
+            //Check arguments
             if (product == null)
                 throw new ArgumentNullException(nameof(product));
-            //TODO: Validate product
+            //Validate product
             ObjectValidator.Validate(product);
             var existing = FindByName(product.Name);
            
@@ -26,7 +26,7 @@ namespace Nile.Stores
         /// <inheritdoc />
         public Product Get ( int id )
         {
-            //TODO: Check arguments
+            //Check arguments
             if (id <= 0)
                 throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
 
@@ -42,7 +42,7 @@ namespace Nile.Stores
         /// <inheritdoc />
         public void Remove ( int id )
         {
-            //TODO: Check arguments
+            // Check arguments
             if (id <= 0)
                 throw new ArgumentOutOfRangeException(nameof(id), "Id must be > 0.");
 
@@ -52,11 +52,11 @@ namespace Nile.Stores
         /// <inheritdoc />
         public Product Update ( Product product )
         {
-            //TODO: Check arguments
+            // Check arguments
             if (product == null)
                throw new ArgumentNullException(nameof(product));
 
-            //TODO: Validate product
+            // Validate product
             ObjectValidator.Validate(product);
 
             //Get existing product
@@ -65,8 +65,9 @@ namespace Nile.Stores
             var existing = GetCore(product.Id);
             if( existingName != null && product.Id != existingName.Id)
                 throw new InvalidOperationException("Product name must be unique.");
-
-            return UpdateCore(existing, product);
+          
+                return UpdateCore(existing, product);
+            
 
         }
 
@@ -84,8 +85,7 @@ namespace Nile.Stores
 
         //New
         protected abstract Product FindByName ( string Name );
-
-  
+        
         #endregion
     }
 }

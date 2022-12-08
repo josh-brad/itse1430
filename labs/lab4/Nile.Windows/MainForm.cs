@@ -34,14 +34,13 @@ namespace Nile.Windows
 
         private void OnProductAdd( object sender, EventArgs e )
         {
-            var child = new ProductDetailForm("Product Details");
-            //new
+            var child = new ProductDetailForm("Product Details");            
             do
             {
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
 
-                //TODO: Handle errors
+                // Handle errors
                 try
                 {
                     //Save product
@@ -127,7 +126,7 @@ namespace Nile.Windows
                                 "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
 
-            //TODO: Handle errors
+            //Handle errors
             
             try
             {
@@ -147,7 +146,7 @@ namespace Nile.Windows
             
                 if (child.ShowDialog(this) != DialogResult.OK)
                     return;
-                //TODO: Handle errors
+                // Handle errors
                 try
                 {
                     //Save product
@@ -180,12 +179,15 @@ namespace Nile.Windows
 
         private void UpdateList ()
         {
-            //TODO: Handle errors
-            _bsProducts.DataSource = _database.GetAll();
-            //_bsProducts.DataSource = _database.GetAll();
+            // Handle errors
+            try
+            {
+                _bsProducts.DataSource = _database.GetAll();
+            }catch(Exception ex)
+            {
+                DisplayError(ex.Message, "Get All Failed");
+            }           
         }
-
-        //private readonly IProductDatabase _database = new Nile.Stores.MemoryProductDatabase();
         private readonly IProductDatabase _database = new SqlProductDatabase(Program.GetConnectionString("ProductDatabase"));
         #endregion
 

@@ -9,6 +9,7 @@ namespace Nile
     public class Product
     {
         /// <summary>Gets or sets the unique identifier.</summary>
+        [Range(0, Int32.MaxValue)]
         public int Id { get; set; }
 
         /// <summary>Gets or sets the name.</summary>
@@ -29,6 +30,7 @@ namespace Nile
 
         /// <summary>Gets or sets the price.</summary>
         [Required]
+        [Range(0, Int32.MaxValue)]
         public decimal Price { get; set; } = 0;      
 
         /// <summary>Determines if discontinued.</summary>

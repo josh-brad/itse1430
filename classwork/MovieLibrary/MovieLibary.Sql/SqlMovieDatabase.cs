@@ -105,7 +105,7 @@ namespace MovieLibary.Sql
             }
             //Data loaded, can work with it now
             var table = ds.Tables.OfType<DataTable>().FirstOrDefault();
-            if (table == null)
+            if (table != null)
             {
                 foreach (DataRow row in table.Rows.OfType<DataRow>())
                 {
